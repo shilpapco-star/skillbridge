@@ -1,0 +1,44 @@
+{
+  "Frontend Developer": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Git",
+    "Responsive Design",
+    "React",
+    "REST APIs",
+    "TypeScript"
+  ],
+  "Backend Developer": [
+    "Programming Fundamentals",
+    "Git",
+    "SQL",
+    "Node.js",
+    "REST APIs",
+    "Databases",
+    "Authentication",
+    "Docker"
+  ],
+  "Data Analyst": [
+    "Excel",
+    "SQL",
+    "Statistics",
+    "Python",
+    "Pandas",
+    "Data Visualization",
+    "Power BI",
+    "Storytelling with Data"
+  ],
+  "Full Stack Developer": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Git",
+    "React",
+    "Node.js",
+    "REST APIs",
+    "SQL",
+    "Databases",
+    "Deployment"
+  ]
+}
