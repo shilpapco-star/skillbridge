@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge — Student Profile</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">SkillBridge</div>
+    <div class="nav-links">
+      <a href="index.html" class="active">Profile</a>
+      <a href="#" class="disabled">Roadmap</a>
+      <a href="#" class="disabled">Dashboard</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h1>Build your profile</h1>
+    <p class="subtitle">This powers your skill gap analysis and roadmap.</p>
+
+    <form id="profileForm">
+      <label for="name">Full name</label>
+      <input type="text" id="name" required placeholder="e.g. Aditi Sharma" />
+
+      <label for="education">Degree</label>
+      <input type="text" id="education" required placeholder="e.g. B.Tech" />
+
+      <label for="branch">Branch</label>
+      <input type="text" id="branch" required placeholder="e.g. Computer Science" />
+
+      <label for="year">Current year</label>
+      <select id="year" required>
+        <option value="">Select year</option>
+        <option value="1">1st year</option>
+        <option value="2">2nd year</option>
+        <option value="3">3rd year</option>
+        <option value="4">4th year</option>
+      </select>
+
+      <label for="targetRole">Target career role</label>
+      <select id="targetRole" required>
+        <option value="">Select a role</option>
+        <option value="Frontend Developer">Frontend Developer</option>
+        <option value="Backend Developer">Backend Developer</option>
+        <option value="Data Analyst">Data Analyst</option>
+        <option value="Full Stack Developer">Full Stack Developer</option>
+      </select>
+
+      <label for="skillInput">Your current skills</label>
+      <div class="skill-input-row">
+        <input type="text" id="skillInput" placeholder="Type a skill and press Enter" />
+      </div>
+      <div id="skillTags" class="skill-tags"></div>
+
+      <button type="submit">Save profile</button>
+    </form>
+
+    <div id="savedMessage" class="saved-message hidden">
+      ✅ Profile saved! Open the browser console or check localStorage to see it.
+    </div>
+  </main>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
