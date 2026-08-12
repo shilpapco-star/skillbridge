@@ -20,6 +20,14 @@ skillInput.addEventListener("keydown", (e) => {
     skillInput.value = "";
   }
 });
+document.getElementById("addSkillBtn").addEventListener("click", () => {
+  const value = skillInput.value.trim();
+  if (value && !currentSkills.includes(value)) {
+    currentSkills.push(value);
+    renderSkillTags();
+  }
+  skillInput.value = "";
+});
 
 // ---- Render the skill tags below the input ----
 function renderSkillTags() {
