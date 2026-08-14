@@ -12,7 +12,7 @@ if (!savedProfile) {
   loadRoadmap(profile);
 }
 
-// ---- Step 2: Fetch roles.json AND projects.json, then compare ----
+// ---- Step 2: Fetch roles.json, projects.json, and read quiz results ----
 async function loadRoadmap(profile) {
   const [rolesRes, projectsRes] = await Promise.all([
     fetch("data/roles.json"),
@@ -20,6 +20,12 @@ async function loadRoadmap(profile) {
   ]);
   const roles = await rolesRes.json();
   const projects = await projectsRes.json();
+
+  // Quiz results live in localStorage, saved by assessment.js
+  // Shape: { "JavaScript": { score: 80, verified: true }, ... }
+  const quizResults = JSON.parse(
+    localStorage.getItem("skillbridge_quiz_results") || "{}"
+  );
 
   const requiredSkills = roles[profile.targetRole];
 
@@ -30,13 +36,29 @@ async function loadRoadmap(profile) {
 
   const mySkillsLower = profile.skills.map((s) => s.toLowerCase().trim());
 
-  // requiredSkills is already in learning order (as written in roles.json)
   const results = requiredSkills.map((skill, index) => {
-    const has = mySkillsLower.includes(skill.toLowerCase());
+    const selfReported = mySkillsLower.includes(skill.toLowerCase());
+    const quizResult = quizResults[skill]; // undefined if not taken yet
+
+    // ---- The actual status logic ----
+    // Taken a quiz and passed (70%+)      -> "have"    ✅
+    // Taken a quiz and failed             -> "improve" ⚠️
+    // Never quizzed, but self-reported    -> "have"    ✅ (trusted, unverified)
+    // Never quizzed, not self-reported    -> "missing" ❌
+    let status;
+    if (quizResult) {
+      status = quizResult.verified ? "have" : "improve";
+    } else if (selfReported) {
+      status = "have";
+    } else {
+      status = "missing";
+    }
+
     return {
       step: index + 1,
       skill,
-      status: has ? "have" : "missing",
+      status,
+      quizScore: quizResult ? quizResult.score : null,
       project: projects[skill] || null,
     };
   });
@@ -65,14 +87,22 @@ function renderRoadmap(profile, results) {
     const li = document.createElement("li");
     li.className = "timeline-item " + r.status;
 
-    const icon = r.status === "have" ? "✅" : "❌";
+    let icon = "✅";
+    if (r.status === "improve") icon = "⚠️";
+    if (r.status === "missing") icon = "❌";
+
+    let scoreNote = "";
+    if (r.quizScore !== null) {
+      scoreNote = ` <span class="quiz-score-note">(quiz: ${r.quizScore}%)</span>`;
+    }
 
     let projectHtml = "";
-    if (r.status === "missing" && r.project) {
+    if ((r.status === "missing" || r.status === "improve") && r.project) {
+      const label = r.status === "improve" ? "Improve with this project" : "Learn with this project";
       projectHtml = `
         <div class="project-suggestion">
           <span class="level-tag">${r.project.level}</span>
-          ${r.project.project}
+          <strong>${label}:</strong> ${r.project.project}
         </div>
       `;
     }
@@ -80,7 +110,7 @@ function renderRoadmap(profile, results) {
     li.innerHTML = `
       <div class="timeline-marker">${r.step}</div>
       <div class="timeline-body">
-        <div class="timeline-title">${icon} ${r.skill}</div>
+        <div class="timeline-title">${icon} ${r.skill}${scoreNote}</div>
         ${projectHtml}
       </div>
     `;

@@ -402,3 +402,13 @@ button[type="submit"]:hover { background: var(--primary-dark); }
 .submit-quiz-btn {
   margin-top: 18px;
 }
+.timeline-item.improve .timeline-marker {
+  background: #d99a2b;
+  color: white;
+}
+
+.quiz-score-note {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
