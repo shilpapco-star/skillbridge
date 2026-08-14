@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge — Career Assistant</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">SkillBridge</div>
+    <div class="nav-links">
+  <a href="index.html">Profile</a>
+  <a href="roadmap.html">Roadmap</a>
+  <a href="assessment.html">Assessment</a>
+  <a href="resume.html">Resume</a>
+  <a href="assistant.html">Assistant</a>
+  <a href="dashboard.html">Dashboard</a>
+</div>
+  </nav>
+
+  <main class="container wide">
+    <div id="noProfile" class="hidden">
+      <h1>No profile found</h1>
+      <p class="subtitle">
+        Please <a href="index.html">create your profile</a> first to chat with your assistant.
+      </p>
+    </div>
+
+    <div id="assistantContent" class="hidden">
+      <h1>Career assistant</h1>
+      <p class="subtitle">Ask about your roadmap, missing skills, or what to do next.</p>
+
+      <div id="chatWindow" class="chat-window"></div>
+
+      <div class="chat-input-row">
+        <input type="text" id="chatInput" placeholder="e.g. What should I learn next?" autocomplete="off" />
+        <button type="button" id="sendBtn">Send</button>
+      </div>
+
+      <div class="suggested-questions" id="suggestedQuestions"></div>
+    </div>
+  </main>
+
+  <script src="js/assistant.js"></script>
+</body>
+</html>
