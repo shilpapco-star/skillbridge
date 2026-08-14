@@ -314,4 +314,91 @@ button[type="submit"]:hover { background: var(--primary-dark); }
 #coverageChart {
   max-width: 280px;
   max-height: 280px;
+}.skill-cards {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skill-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  background: var(--card);
+}
+
+.skill-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-card-name {
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.badge-verified { background: #e8f7ee; color: #1f7a45; }
+.badge-warning { background: #fff8e6; color: #8a6d1f; }
+.badge-neutral { background: #ecebfc; color: var(--primary-dark); }
+.badge-missing { background: #f1f1f5; color: var(--text-muted); }
+
+.skill-card-actions {
+  margin-top: 12px;
+}
+
+.take-quiz-btn, .submit-quiz-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.take-quiz-btn:hover, .submit-quiz-btn:hover {
+  background: var(--primary-dark);
+}
+
+.no-quiz {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.quiz-question {
+  margin-top: 16px;
+  font-size: 14px;
+}
+
+.quiz-question p {
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.quiz-option {
+  display: block;
+  padding: 6px 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.quiz-option input {
+  margin-right: 8px;
+}
+
+.submit-quiz-btn {
+  margin-top: 18px;
 }

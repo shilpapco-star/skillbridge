@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge — Skill Assessment</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">SkillBridge</div>
+    <div class="nav-links">
+      <a href="index.html">Profile</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="assessment.html" class="active">Assessment</a>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+  </nav>
+
+  <main class="container wide">
+    <div id="noProfile" class="hidden">
+      <h1>No profile found</h1>
+      <p class="subtitle">
+        Please <a href="index.html">create your profile</a> first to take skill assessments.
+      </p>
+    </div>
+
+    <div id="assessmentContent" class="hidden">
+      <h1>Skill assessment</h1>
+      <p class="subtitle" id="assessSubtitle"></p>
+
+      <div id="skillCards" class="skill-cards"></div>
+    </div>
+  </main>
+
+  <script src="js/assessment.js"></script>
+</body>
+</html>
