@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge — Resume Analysis</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">SkillBridge</div>
+    <div class="nav-links">
+  <a href="index.html">Profile</a>
+  <a href="roadmap.html">Roadmap</a>
+  <a href="assessment.html">Assessment</a>
+  <a href="resume.html">Resume</a>
+  <a href="dashboard.html">Dashboard</a>
+</div>
+  </nav>
+
+  <main class="container wide">
+    <div id="noProfile" class="hidden">
+      <h1>No profile found</h1>
+      <p class="subtitle">
+        Please <a href="index.html">create your profile</a> first to analyze your resume.
+      </p>
+    </div>
+
+    <div id="resumeContent" class="hidden">
+      <h1>Resume skill analysis</h1>
+      <p class="subtitle">Paste your resume text below. We'll extract technical skills and compare them to your target role.</p>
+
+      <textarea id="resumeText" rows="10" placeholder="Paste your resume text here..."></textarea>
+      <button type="button" id="analyzeBtn">Analyze resume</button>
+
+      <div id="resultsSection" class="hidden">
+        <h3 class="section-heading">Skills found in your resume</h3>
+        <div id="foundSkills" class="skill-tags"></div>
+
+        <h3 class="section-heading">Missing for your target role</h3>
+        <div id="missingSkills" class="skill-tags"></div>
+
+        <button type="button" id="mergeBtn" class="secondary-btn">Add found skills to my profile</button>
+        <span id="mergeMessage" class="saved-message hidden">✅ Profile updated with new skills!</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/resume.js"></script>
+</body>
+</html>

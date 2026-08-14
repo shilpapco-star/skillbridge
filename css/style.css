@@ -412,3 +412,52 @@ button[type="submit"]:hover { background: var(--primary-dark); }
   font-weight: 400;
   color: var(--text-muted);
 }
+#resumeText {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  margin-top: 16px;
+}
+
+#analyzeBtn {
+  margin-top: 12px;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#analyzeBtn:hover {
+  background: var(--primary-dark);
+}
+
+.static-tag {
+  cursor: default;
+}
+
+.missing-tag {
+  background: #fdeeee;
+  color: #b23c3c;
+}
+
+.secondary-btn {
+  margin-top: 20px;
+  padding: 10px 18px;
+  background: white;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.secondary-btn:hover {
+  background: #f4f3fd;
+}
