@@ -543,4 +543,79 @@ button[type="submit"]:hover { background: var(--primary-dark); }
 
 .suggestion-chip:hover {
   background: #ddd9fa;
+}.gami-bar {
+  display: flex;
+  gap: 16px;
+  padding: 8px 32px;
+  background: #f0eefc;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-dark);
+  flex-wrap: wrap;
+}
+
+.gami-link {
+  text-decoration: none;
+  color: var(--primary-dark);
+}
+
+.xp-toast {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: var(--text);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 999;
+}
+
+.xp-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.badge-grid {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 14px;
+}
+
+.badge-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 12px;
+  text-align: center;
+}
+
+.badge-card.earned {
+  background: #fff8e6;
+  border-color: #f3e2b0;
+}
+
+.badge-card.locked {
+  opacity: 0.5;
+}
+
+.badge-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.badge-name {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.badge-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
 }

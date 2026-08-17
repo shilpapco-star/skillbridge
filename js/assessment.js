@@ -148,7 +148,15 @@ function scoreQuiz(card, skill, questions, form) {
 
   quizResults[skill] = { score, verified };
   localStorage.setItem("skillbridge_quiz_results", JSON.stringify(quizResults));
+if (verified) {
+  SkillBridgeGamification.addXP(20, `${skill} verified`);
+} else {
+  SkillBridgeGamification.addXP(5, `${skill} quiz attempted`);
+}
+SkillBridgeGamification.unlockBadge("first_quiz");
 
+const verifiedCount = Object.values(quizResults).filter((r) => r.verified).length;
+if (verifiedCount >= 3) SkillBridgeGamification.unlockBadge("quiz_master");
   // Re-render this card with the updated badge/result
   const savedProfile = JSON.parse(localStorage.getItem("skillbridge_profile"));
   const mySkillsLower = savedProfile.skills.map((s) => s.toLowerCase().trim());

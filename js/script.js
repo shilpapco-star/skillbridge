@@ -82,4 +82,6 @@ form.addEventListener("submit", (e) => {
 
   savedMessage.classList.remove("hidden");
   console.log("Saved profile:", profile);
+SkillBridgeGamification.addXP(10, "Profile saved");
+SkillBridgeGamification.unlockBadge("first_profile");
 });

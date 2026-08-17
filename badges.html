@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge — Badges</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">SkillBridge</div>
+    <div class="nav-links">
+      <a href="index.html">Profile</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="resume.html">Resume</a>
+      <a href="assistant.html">Assistant</a>
+      <a href="dashboard.html">Dashboard</a>
+    </div>
+  </nav>
+  <div class="gami-bar" id="gamificationBar"></div>
+  
+
+  <main class="container wide">
+    <h1>Your badges</h1>
+    <p class="subtitle">Earned by taking real action across SkillBridge.</p>
+
+    <div id="badgeGrid" class="badge-grid"></div>
+  </main>
+
+  <script src="js/gamification.js"></script>
+  <script>
+    const { BADGE_DEFINITIONS, getBadges } = window.SkillBridgeGamification;
+    const earned = getBadges();
+    const grid = document.getElementById("badgeGrid");
+
+    Object.keys(BADGE_DEFINITIONS).forEach((id) => {
+      const badge = BADGE_DEFINITIONS[id];
+      const isEarned = earned.includes(id);
+
+      const card = document.createElement("div");
+      card.className = "badge-card " + (isEarned ? "earned" : "locked");
+      card.innerHTML = `
+        <div class="badge-icon">${isEarned ? badge.icon : "🔒"}</div>
+        <div class="badge-name">${badge.name}</div>
+        <div class="badge-desc">${badge.desc}</div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

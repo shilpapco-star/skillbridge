@@ -74,6 +74,7 @@ function analyzeResume() {
   });
 
   renderResults(foundSkills);
+  SkillBridgeGamification.unlockBadge("resume_pro");
 }
 
 // ---- Step 4: Compare against target role and render ----

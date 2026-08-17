@@ -75,6 +75,7 @@ function renderRoadmap(profile, results) {
   const haveCount = results.filter((r) => r.status === "have").length;
   const percent = Math.round((haveCount / results.length) * 100);
 
+  if (percent >= 50) SkillBridgeGamification.unlockBadge("halfway");
   document.getElementById("progressFill").style.width = percent + "%";
   document.getElementById("progressLabel").textContent =
     `${haveCount} / ${results.length} skills (${percent}%)`;
