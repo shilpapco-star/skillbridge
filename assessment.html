@@ -18,6 +18,7 @@
   <a href="resume.html">Resume</a>
   <a href="assistant.html">Assistant</a>
   <a href="dashboard.html">Dashboard</a>
+  <a href="#" onclick="logout(); return false;">Log out</a>
 </div>
   </nav>
 <div class="gami-bar" id="gamificationBar"></div>
@@ -38,6 +39,10 @@
   </main>
 
   <script src="js/assessment.js"></script>
+  <script src="js/auth.js"></script>
+<script>requireAuth();</script>
+<script src="js/gamification.js"></script>
+<script src="js/script.js"></script>  <!-- or whatever that page already has -->
   <script src="js/gamification.js"></script>
 <script src="js/script.js"></script>  <!-- (or roadmap.js / assessment.js / etc — whatever that page already has) -->
 </body>

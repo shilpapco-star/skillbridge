@@ -5,60 +5,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SkillBridge — Dashboard</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/dashboard.css" />
 </head>
-<body>
+<body class="db-body">
 
   <nav class="navbar">
     <div class="logo">SkillBridge</div>
     <div class="nav-links">
-  <a href="index.html">Profile</a>
-  <a href="roadmap.html">Roadmap</a>
-  <a href="assessment.html">Assessment</a>
-  <a href="resume.html">Resume</a>
-  <a href="assistant.html">Assistant</a>
-  <a href="dashboard.html">Dashboard</a>
-</div>
+      <a href="index.html">Profile</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="resume.html">Resume</a>
+      <a href="assistant.html">Assistant</a>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="#" onclick="logout(); return false;">Log out</a>
+    </div>
   </nav>
-  <div class="gami-bar" id="gamificationBar"></div>
 
-  <main class="container wide">
-    <div id="noProfile" class="hidden">
-      <h1>No profile found</h1>
-      <p class="subtitle">
-        Please <a href="index.html">create your profile</a> first to see your dashboard.
-      </p>
-    </div>
+  <div id="noProfile" class="hidden db-empty">
+    <h1>No profile found</h1>
+    <p class="subtitle">Please <a href="index.html">create your profile</a> first to see your dashboard.</p>
+  </div>
 
-    <div id="dashboardContent" class="hidden">
-      <h1 id="dashHeading">Your dashboard</h1>
-      <p class="subtitle" id="dashSubtitle"></p>
+  <main id="dashboardContent" class="db-main hidden">
 
-      <div class="stat-cards">
-        <div class="stat-card">
-          <div class="stat-value" id="statHave">0</div>
-          <div class="stat-label">Skills you have</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="statMissing">0</div>
-          <div class="stat-label">Skills to learn</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="statPercent">0%</div>
-          <div class="stat-label">Roadmap complete</div>
+    <section class="db-hero">
+      <div class="db-ring-wrap">
+        <svg viewBox="0 0 200 200" class="db-ring">
+          <circle cx="100" cy="100" r="88" class="db-ring-track" />
+          <circle cx="100" cy="100" r="88" class="db-ring-fill" id="ringFill" />
+        </svg>
+        <div class="db-ring-center">
+          <div class="db-ring-percent" id="ringPercent">0%</div>
         </div>
       </div>
-
-      <div class="chart-card">
-        <h3 class="section-heading">Skill coverage</h3>
-        <canvas id="coverageChart" width="300" height="300"></canvas>
+      <div class="db-hero-text">
+        <p class="db-eyebrow" id="dbEyebrow">YOUR PATH</p>
+        <h1 class="db-heading" id="dbHeading">Welcome back</h1>
+        <p class="db-sub" id="dbSub"></p>
       </div>
-    </div>
+    </section>
+
+    <section class="db-focus" id="dbFocus">
+      <!-- filled by JS -->
+    </section>
+
   </main>
 
+  <script src="js/auth.js"></script>
+  <script>requireAuth();</script>
   <script src="js/dashboard.js"></script>
-  <script src="js/gamification.js"></script>
-<script src="js/script.js"></script>  <!-- (or roadmap.js / assessment.js / etc — whatever that page already has) -->
 </body>
 </html>

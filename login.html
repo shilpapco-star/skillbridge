@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge — Log in</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      background: radial-gradient(circle at 20% 20%, #ecebfc 0%, var(--bg) 45%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* subtle dotted "path" motif, echoing the roadmap concept */
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, #d8d6f7 1.5px, transparent 1.5px);
+      background-size: 26px 26px;
+      opacity: 0.5;
+      mask-image: radial-gradient(circle at 50% 40%, black 0%, transparent 70%);
+    }
+    .auth-card {
+      position: relative;
+      max-width: 380px;
+      width: 90%;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      box-shadow: 0 20px 50px -20px rgba(74, 71, 209, 0.25);
+    }
+    .auth-logo {
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .auth-tagline {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .auth-toggle {
+      display: flex;
+      background: var(--bg);
+      border-radius: 999px;
+      padding: 4px;
+      margin-bottom: 20px;
+    }
+    .auth-toggle button {
+      flex: 1;
+      border: none;
+      background: none;
+      padding: 8px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .auth-toggle button.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .auth-error {
+      color: #b23c3c;
+      font-size: 13px;
+      margin-top: 10px;
+      display: none;
+    }
+    .auth-error.show { display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="auth-card">
+    <div class="auth-logo">🎯 SkillBridge</div>
+    <p class="auth-tagline">Your personal path from where you are to where you want to be.</p>
+
+    <div class="auth-toggle">
+      <button type="button" id="loginTab" class="active">Log in</button>
+      <button type="button" id="signupTab">Sign up</button>
+    </div>
+
+    <form id="authForm">
+      <label for="authEmail">Email</label>
+      <input type="email" id="authEmail" required placeholder="you@example.com" />
+
+      <label for="authPassword">Password</label>
+      <input type="password" id="authPassword" required placeholder="••••••••" minlength="4" />
+
+      <button type="submit" id="authSubmitBtn">Log in</button>
+      <p class="auth-error" id="authError"></p>
+    </form>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>
