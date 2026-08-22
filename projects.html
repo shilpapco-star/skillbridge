@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function() {
+      const saved = localStorage.getItem("skillbridge_theme") || "light";
+      document.documentElement.setAttribute("data-theme", saved);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillBridge — Discover Projects</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">SkillBridge</div>
+    <div class="nav-links">
+      <a href="index.html">Profile</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="resume.html">Resume</a>
+      <a href="projects.html" class="active">Projects</a>
+      <a href="assistant.html">Assistant</a>
+      <a href="dashboard.html">Dashboard</a>
+      <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
+      <a href="#" onclick="logout(); return false;">Log out</a>
+    </div>
+  </nav>
+
+  <main class="container wide">
+    <h1>Discover projects</h1>
+    <p class="subtitle">Search any skill — we'll pull the most popular real projects on GitHub right now.</p>
+
+    <div class="gh-search-row">
+      <input type="text" id="ghSearchInput" placeholder="e.g. React, Node.js, Data Analysis..." />
+      <button type="button" id="ghSearchBtn">Search</button>
+    </div>
+
+    <div id="ghStatus" class="gh-status"></div>
+    <div id="ghResults" class="gh-results"></div>
+  </main>
+
+  <script src="js/theme.js"></script>
+  <script type="module">
+    import { requireAuth } from "./js/auth.js";
+    requireAuth();
+  </script>
+  <script src="js/projects.js"></script>
+</body>
+</html>

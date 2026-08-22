@@ -1,38 +1,31 @@
-// SkillBridge Auth (localStorage-based demo auth — not cryptographically secure,
-// good enough for a portfolio flow; a real backend would hash+verify server-side)
+import { auth } from "./firebase-config.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-const ACCOUNTS_KEY = "skillbridge_accounts"; // { email: obscuredPassword }
-const SESSION_KEY = "skillbridge_session";   // currently logged-in email
-
-// Very light obfuscation so passwords aren't sitting in plain text.
-// NOT real security — a real app hashes+salts on a server.
-function obscure(str) {
-  return btoa(unescape(encodeURIComponent(str)));
+// ---- Guard: call on every protected page ----
+// Redirects to login.html if nobody is signed in.
+export function requireAuth() {
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "login.html";
+    }
+  });
 }
 
-function getAccounts() {
-  return JSON.parse(localStorage.getItem(ACCOUNTS_KEY) || "{}");
-}
-
-function getSession() {
-  return localStorage.getItem(SESSION_KEY);
-}
-
-function logout() {
-  localStorage.removeItem(SESSION_KEY);
-  window.location.href = "login.html";
-}
-
-// ---- Guard: call this at the top of every protected page ----
-function requireAuth() {
-  if (!getSession()) {
+// ---- Logout, exposed globally so navbar's onclick="logout()" can reach it ----
+window.logout = function () {
+  signOut(auth).then(() => {
     window.location.href = "login.html";
-  }
-}
+  });
+};
 
-// ---- Only runs the form-handling logic if we're actually on login.html ----
+// ---- Login page specific logic (only runs if the login form is on this page) ----
 if (document.getElementById("authForm")) {
-  let mode = "login"; // or "signup"
+  let mode = "login";
 
   const loginTab = document.getElementById("loginTab");
   const signupTab = document.getElementById("signupTab");
@@ -40,10 +33,10 @@ if (document.getElementById("authForm")) {
   const errorEl = document.getElementById("authError");
   const form = document.getElementById("authForm");
 
-  // If already logged in, skip straight to the app
-  if (getSession()) {
-    window.location.href = "index.html";
-  }
+  // Already logged in? Skip straight to the app.
+  onAuthStateChanged(auth, (user) => {
+    if (user) window.location.href = "index.html";
+  });
 
   loginTab.addEventListener("click", () => setMode("login"));
   signupTab.addEventListener("click", () => setMode("signup"));
@@ -58,32 +51,34 @@ if (document.getElementById("authForm")) {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const email = document.getElementById("authEmail").value.trim().toLowerCase();
+    const email = document.getElementById("authEmail").value.trim();
     const password = document.getElementById("authPassword").value;
-    const accounts = getAccounts();
 
-    if (mode === "signup") {
-      if (accounts[email]) {
-        showError("An account with this email already exists — try logging in instead.");
-        return;
-      }
-      accounts[email] = obscure(password);
-      localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts));
-      localStorage.setItem(SESSION_KEY, email);
-      window.location.href = "index.html";
-    } else {
-      if (!accounts[email]) {
-        showError("No account found with this email — try signing up instead.");
-        return;
-      }
-      if (accounts[email] !== obscure(password)) {
-        showError("Incorrect password. Try again.");
-        return;
-      }
-      localStorage.setItem(SESSION_KEY, email);
-      window.location.href = "index.html";
-    }
+    const action =
+      mode === "signup"
+        ? createUserWithEmailAndPassword(auth, email, password)
+        : signInWithEmailAndPassword(auth, email, password);
+
+    action
+      .then(() => {
+        window.location.href = "index.html";
+      })
+      .catch((err) => showError(friendlyError(err.code)));
   });
+
+  function friendlyError(code) {
+    if (code === "auth/email-already-in-use")
+      return "An account with this email already exists — try logging in instead.";
+    if (code === "auth/invalid-credential" || code === "auth/wrong-password")
+      return "Incorrect email or password.";
+    if (code === "auth/user-not-found")
+      return "No account found with this email — try signing up instead.";
+    if (code === "auth/weak-password")
+      return "Password should be at least 6 characters.";
+    if (code === "auth/invalid-email")
+      return "Please enter a valid email address.";
+    return "Something went wrong. Please try again.";
+  }
 
   function showError(msg) {
     errorEl.textContent = msg;

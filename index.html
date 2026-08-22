@@ -3,81 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkillBridge — Student Profile</title>
+  <script>
+  (function() {
+    const saved = localStorage.getItem("skillbridge_theme") || "light";
+    document.documentElement.setAttribute("data-theme", saved);
+  })();
+</script>
+  <title>SkillBridge — Your Profile</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/profile.css" />
 </head>
-<body>
+<body class="pf-body">
 
   <nav class="navbar">
     <div class="logo">SkillBridge</div>
     <div class="nav-links">
-  <a href="index.html">Profile</a>
-  <a href="roadmap.html">Roadmap</a>
-  <a href="assessment.html">Assessment</a>
-  <a href="resume.html">Resume</a>
-  <a href="assistant.html">Assistant</a>
-  <a href="dashboard.html">Dashboard</a>
-  <a href="#" onclick="logout(); return false;">Log out</a>
-
-</div>
-
+      <a href="index.html" class="active">Profile</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="assessment.html">Assessment</a>
+      <a href="resume.html">Resume</a>
+      <a href="assistant.html">Assistant</a>
+      <a href="dashboard.html">Dashboard</a>
+      <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
+      <a href="#" onclick="logout(); return false;">Log out</a>
+    </div>
   </nav>
-  <div class="gami-bar" id="gamificationBar"></div>
 
-  <main class="container">
-    <h1>Build your profile</h1>
-    <p class="subtitle">This powers your skill gap analysis and roadmap.</p>
+  <main class="pf-main">
+    <div class="pf-intro">
+      <p class="pf-eyebrow">STEP ONE</p>
+      <h1 class="pf-heading">Tell us where you're starting from</h1>
+      <p class="pf-sub">This shapes every recommendation SkillBridge gives you — takes about a minute.</p>
+    </div>
 
-    <form id="profileForm">
-      <label for="name">Full name</label>
-      <input type="text" id="name" required placeholder="e.g. Aditi Sharma" />
+    <form id="profileForm" class="pf-card">
 
-      <label for="education">Degree</label>
-      <input type="text" id="education" required placeholder="e.g. B.Tech" />
+      <div class="pf-row">
+        <div class="pf-field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" required placeholder="Aditi Sharma" />
+        </div>
+        <div class="pf-field">
+          <label for="year">Current year</label>
+          <select id="year" required>
+            <option value="">Select</option>
+            <option value="1">1st year</option>
+            <option value="2">2nd year</option>
+            <option value="3">3rd year</option>
+            <option value="4">4th year</option>
+          </select>
+        </div>
+      </div>
 
-      <label for="branch">Branch</label>
-      <input type="text" id="branch" required placeholder="e.g. Computer Science" />
+      <div class="pf-row">
+        <div class="pf-field">
+          <label for="education">Degree</label>
+          <input type="text" id="education" required placeholder="B.Tech" />
+        </div>
+        <div class="pf-field">
+          <label for="branch">Branch</label>
+          <input type="text" id="branch" required placeholder="Computer Science" />
+        </div>
+      </div>
 
-      <label for="year">Current year</label>
-      <select id="year" required>
-        <option value="">Select year</option>
-        <option value="1">1st year</option>
-        <option value="2">2nd year</option>
-        <option value="3">3rd year</option>
-        <option value="4">4th year</option>
-      </select>
+      <div class="pf-field">
+        <label for="targetRole">Target career role</label>
+        <select id="targetRole" required>
+          <option value="">Select a role</option>
+          <option value="Frontend Developer">Frontend Developer</option>
+          <option value="Backend Developer">Backend Developer</option>
+          <option value="Data Analyst">Data Analyst</option>
+          <option value="Full Stack Developer">Full Stack Developer</option>
+        </select>
+      </div>
 
-      <label for="targetRole">Target career role</label>
-      <select id="targetRole" required>
-        <option value="">Select a role</option>
-        <option value="Frontend Developer">Frontend Developer</option>
-        <option value="Backend Developer">Backend Developer</option>
-        <option value="Data Analyst">Data Analyst</option>
-        <option value="Full Stack Developer">Full Stack Developer</option>
-      </select>
+      <div class="pf-field">
+        <label for="skillInput">Skills you already have</label>
+        <div class="pf-skill-row">
+          <input type="text" id="skillInput" autocomplete="off" placeholder="Type a skill, press Enter" />
+          <button type="button" id="addSkillBtn">Add</button>
+        </div>
+        <div id="skillTags" class="pf-skill-tags"></div>
+      </div>
 
-      <label for="skillInput">Your current skills</label>
-      <div class="skill-input-row">
-  <input type="text" id="skillInput" autocomplete="off" placeholder="Type a skill and press Enter" />
-  <button type="button" id="addSkillBtn">Add</button>
-</div>
-      <div id="skillTags" class="skill-tags"></div>
-
-      <button type="submit">Save profile</button>
+      <button type="submit" class="pf-submit">Save and continue →</button>
     </form>
 
-    <div id="savedMessage" class="saved-message hidden">
-      ✅ Profile saved! Open the browser console or check localStorage to see it.
-    </div>
+    <div id="savedMessage" class="pf-saved hidden">✅ Saved — head to your Roadmap to see where you stand.</div>
   </main>
 
-  <script src="js/script.js"></script>
-  <script src="js/auth.js"></script>
-<script>requireAuth();</script>
+  <script type="module">
+  import { requireAuth } from "./js/auth.js";
+  requireAuth();
+</script>
 <script src="js/gamification.js"></script>
-<script src="js/script.js"></script>  <!-- or whatever that page already has -->
-  <script src="js/gamification.js"></script>
-<script src="js/script.js"></script>  <!-- (or roadmap.js / assessment.js / etc — whatever that page already has) -->
+<script type="module" src="js/script.js"></script>
+<script src="js/theme.js"></script>
 </body>
 </html>

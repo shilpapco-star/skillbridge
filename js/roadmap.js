@@ -75,7 +75,6 @@ function renderRoadmap(profile, results) {
   const haveCount = results.filter((r) => r.status === "have").length;
   const percent = Math.round((haveCount / results.length) * 100);
 
-  if (percent >= 50) SkillBridgeGamification.unlockBadge("halfway");
   document.getElementById("progressFill").style.width = percent + "%";
   document.getElementById("progressLabel").textContent =
     `${haveCount} / ${results.length} skills (${percent}%)`;
@@ -100,10 +99,19 @@ function renderRoadmap(profile, results) {
     let projectHtml = "";
     if ((r.status === "missing" || r.status === "improve") && r.project) {
       const label = r.status === "improve" ? "Improve with this project" : "Learn with this project";
+      const daysNote = r.project.days ? ` · ~${r.project.days} days` : "";
+      const videoUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(
+        r.skill + " full course in one shot for beginners"
+      )}`;
+      const githubUrl = `projects.html?q=${encodeURIComponent(r.skill + " project")}`;
       projectHtml = `
         <div class="project-suggestion">
-          <span class="level-tag">${r.project.level}</span>
+          <span class="level-tag">${r.project.level}${daysNote}</span>
           <strong>${label}:</strong> ${r.project.project}
+          <br />
+          <a href="${videoUrl}" target="_blank" rel="noopener" class="video-link">🎥 Watch a one-shot tutorial</a>
+          &nbsp;·&nbsp;
+          <a href="${githubUrl}" class="video-link">🔗 Find real examples on GitHub</a>
         </div>
       `;
     }
