@@ -9,6 +9,7 @@
     document.documentElement.setAttribute("data-theme", saved);
   })();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
   <title>SkillBridge — Roadmap</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
   <link rel="stylesheet" href="css/style.css" />
@@ -17,22 +18,24 @@
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="logo">SkillBridge</div>
-  <div class="nav-links">
-  <a href="index.html">Profile</a>
-  <a href="roadmap.html">Roadmap</a>
-  <a href="assessment.html">Assessment</a>
-  <a href="resume.html">Resume</a>
-  <a href="assistant.html">Assistant</a>
-  <a href="dashboard.html">Dashboard</a>
-  <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
-  <a href="#" onclick="logout(); return false;">Log out</a>
-</div>
-  </nav>
-  <div class="gami-bar" id="gamificationBar"></div>
-
-  <main class="container">
+  <div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="app-logo">🎯 SkillBridge</div>
+    <nav class="app-nav">
+      <a href="dashboard.html">▦ Dashboard</a>
+      <a href="index.html">👤 Profile</a>
+      <a href="roadmap.html" class="active">🧭 Roadmap</a>
+      <a href="assessment.html">📝 Assessment</a>
+      <a href="resume.html">📄 Resume</a>
+      <a href="projects.html">🔗 Projects</a>
+      <a href="assistant.html">💬 Assistant</a>
+      <a href="badges.html">🏅 Badges</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle app-theme-toggle" type="button">🌙</button>
+    <button class="app-logout" onclick="logout()">⎋ Log out</button>
+  </aside>
+  <main class="app-main">
+    <div class="container">
     <div id="noProfile" class="hidden">
       <h1>No profile found</h1>
       <p class="subtitle">
@@ -41,30 +44,34 @@
     </div>
 
     <div id="roadmapContent" class="hidden">
-      <h1 id="roleHeading">Your roadmap</h1>
-      <p class="subtitle" id="roleSubtitle"></p>
+  <h1 id="roleHeading">Your roadmap</h1>
+  <p class="subtitle" id="roleSubtitle"></p>
 
-      <div class="progress-wrapper">
-        <div class="progress-bar">
-          <div id="progressFill" class="progress-fill"></div>
-        </div>
-        <span id="progressLabel" class="progress-label"></span>
-      </div>
-
-      <h3 class="section-heading">Skill checklist</h3>
-      <ul id="skillList" class="skill-list"></ul>
+  <div class="progress-wrapper">
+    <div class="progress-bar">
+      <div id="progressFill" class="progress-fill"></div>
     </div>
+    <span id="progressLabel" class="progress-label"></span>
+    
+  </div>
+
+  <div id="upNextBanner" class="up-next-banner"></div>
+  <div class="chart-card">
+  <canvas id="skillChart" width="300" height="220"></canvas>
+</div>
+
+  <h3 class="section-heading">Skill checklist</h3>
+  <ul id="skillList" class="skill-list"></ul>
+</div>
+</div>
   </main>
 
-  <script src="js/roadmap.js"></script>
   <script type="module">
   import { requireAuth } from "./js/auth.js";
   requireAuth();
 </script>
 <script src="js/gamification.js"></script>
-<script src="js/script.js"></script>  <!-- or whatever that page already has -->
-  <script src="js/gamification.js"></script>
-<script src="js/script.js"></script>  <!-- (or roadmap.js / assessment.js / etc — whatever that page already has) -->
 <script src="js/theme.js"></script>
+<script src="js/roadmap.js"></script>
 </body>
 </html>

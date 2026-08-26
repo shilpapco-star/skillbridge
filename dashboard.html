@@ -1,74 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function() {
+      const saved = localStorage.getItem("skillbridge_theme") || "light";
+      document.documentElement.setAttribute("data-theme", saved);
+    })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-  (function() {
-    const saved = localStorage.getItem("skillbridge_theme") || "light";
-    document.documentElement.setAttribute("data-theme", saved);
-  })();
-</script>
   <title>SkillBridge — Dashboard</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/dashboard.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard2.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 </head>
-<body class="db-body">
+<body class="d2-body">
 
-  <nav class="navbar">
-    <div class="logo">SkillBridge</div>
-    <div class="nav-links">
-      <a href="index.html">Profile</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="assessment.html">Assessment</a>
-      <a href="resume.html">Resume</a>
-      <a href="assistant.html">Assistant</a>
-      <a href="dashboard.html" class="active">Dashboard</a>
-      <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
-      <a href="#" onclick="logout(); return false;">Log out</a>
-    </div>
-  </nav>
-
-  <div id="noProfile" class="hidden db-empty">
+  <div id="noProfile" class="hidden d2-empty">
     <h1>No profile found</h1>
-    <p class="subtitle">Please <a href="index.html">create your profile</a> first to see your dashboard.</p>
+    <p class="subtitle"><a href="index.html">Create your profile</a> first to see your dashboard.</p>
   </div>
 
-  <main id="dashboardContent" class="db-main hidden">
+  <div id="dashboardShell" class="d2-shell hidden">
 
-    <section class="db-hero">
-      <div class="db-ring-wrap">
-        <svg viewBox="0 0 200 200" class="db-ring">
-          <circle cx="100" cy="100" r="88" class="db-ring-track" />
-          <circle cx="100" cy="100" r="88" class="db-ring-fill" id="ringFill" />
-        </svg>
-        <div class="db-ring-center">
-          <div class="db-ring-percent" id="ringPercent">0%</div>
+    <aside class="d2-sidebar">
+      <div class="d2-logo">🎯 SkillBridge</div>
+      <nav class="d2-nav">
+        <a href="dashboard.html" class="active">▦ Dashboard</a>
+        <a href="index.html">👤 Profile</a>
+        <a href="roadmap.html">🧭 Roadmap</a>
+        <a href="assessment.html">📝 Assessment</a>
+        <a href="resume.html">📄 Resume</a>
+        <a href="projects.html">🔗 Projects</a>
+        <a href="assistant.html">💬 Assistant</a>
+      </nav>
+      <button class="d2-logout" onclick="logout()">⎋ Log out</button>
+    </aside>
+
+    <main class="d2-main">
+      <header class="d2-header">
+        <h1>Dashboard</h1>
+        <div class="d2-header-actions">
+          <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
+          <a href="projects.html" class="d2-search">🔍 Search skills, projects...</a>
+        </div>
+      </header>
+
+      <div class="d2-welcome">
+        <h2 id="d2Welcome">Welcome back 👋</h2>
+        <a href="roadmap.html" class="d2-btn-outline">View Roadmap →</a>
+      </div>
+
+      <div class="d2-grid">
+        <div class="d2-card d2-analytics">
+          <div class="d2-card-header">
+            <h3>Skill Coverage</h3>
+          </div>
+          <canvas id="coverageDonut" width="180" height="180"></canvas>
+          <div class="d2-stats-row">
+            <div class="d2-mini-stat">
+              <strong id="haveCountStat">0</strong>
+              <span>Completed</span>
+            </div>
+            <div class="d2-mini-stat">
+              <strong id="totalCountStat">0</strong>
+              <span>Total skills</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="d2-card d2-skills-table">
+          <div class="d2-card-header">
+            <h3>Your Skills <span id="skillCountLabel" class="d2-count-badge">0</span></h3>
+            <a href="assessment.html" class="d2-btn-fill">+ Take a test</a>
+          </div>
+          <table class="d2-table">
+            <thead>
+              <tr><th>Skill</th><th>Status</th><th>Est. Time</th><th>Progress</th></tr>
+            </thead>
+            <tbody id="skillsTableBody"></tbody>
+          </table>
         </div>
       </div>
-      <div class="db-hero-text">
-        <p class="db-eyebrow" id="dbEyebrow">YOUR PATH</p>
-        <h1 class="db-heading" id="dbHeading">Welcome back</h1>
-        <p class="db-sub" id="dbSub"></p>
+    </main>
+
+    <aside class="d2-right">
+      <div class="d2-profile-card">
+        <div class="d2-avatar">🧑‍💻</div>
+        <h3 id="profileName">—</h3>
+        <p id="profileRole">—</p>
+        <a href="index.html" class="d2-btn-outline-white">Edit profile</a>
       </div>
-    </section>
 
-    <section class="db-focus" id="dbFocus">
-      <!-- filled by JS -->
-    </section>
+      <div class="d2-status-card">
+        <h3>Achievements</h3>
+        <div id="badgeStatusList"></div>
+      </div>
+    </aside>
 
-  </main>
+  </div>
 
-  <script type="module">
-  import { requireAuth } from "./js/auth.js";
-  requireAuth();
-</script>
-  <script src="js/dashboard.js"></script>
   <script src="js/theme.js"></script>
+  <script type="module">
+    import { requireAuth } from "./js/auth.js";
+    requireAuth();
+  </script>
+  <script src="js/gamification.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>

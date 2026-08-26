@@ -76,9 +76,94 @@ function renderRoadmap(profile, results) {
   const percent = Math.round((haveCount / results.length) * 100);
 
   document.getElementById("progressFill").style.width = percent + "%";
-  document.getElementById("progressLabel").textContent =
-    `${haveCount} / ${results.length} skills (${percent}%)`;
+document.getElementById("progressLabel").textContent =
+  `${haveCount} / ${results.length} skills (${percent}%)`;
 
+const next = results.find((r) => r.status === "missing" || r.status === "improve");
+const bannerEl = document.getElementById("upNextBanner");
+if (!next) {
+  bannerEl.innerHTML = `<strong>You're all caught up 🎉</strong> — every required skill is covered.`;
+} else {
+  const verb = next.status === "improve" ? "Strengthen" : "Learn";
+  bannerEl.innerHTML = `<strong>Up next:</strong> ${verb} <strong>${next.skill}</strong> (step ${next.step} of ${results.length})`;
+renderSkillChart(results);
+}
+
+// ---- Interactive doughnut chart showing how your skills break down for this role ----
+function renderSkillChart(results) {
+  const canvas = document.getElementById("skillChart");
+  if (!canvas || typeof Chart === "undefined") return;
+
+  const have = results.filter((r) => r.status === "have").length;
+  const improve = results.filter((r) => r.status === "improve").length;
+  const missing = results.filter((r) => r.status === "missing").length;
+  const total = results.length;
+  const percent = total ? Math.round((have / total) * 100) : 0;
+
+  new Chart(canvas, {
+    type: "doughnut",
+    data: {
+      labels: ["Verified", "Needs improvement", "Not started"],
+      datasets: [
+        {
+          data: [have, improve, missing],
+          backgroundColor: ["#2fa96b", "#d99a2b", "#e15c5c"],
+          borderWidth: 3,
+          borderColor: "#ffffff",
+          hoverOffset: 12,
+        },
+      ],
+    },
+    options: {
+      responsive: false,
+      cutout: "68%",
+      plugins: {
+        legend: {
+          position: "bottom",
+          labels: { usePointStyle: true, boxWidth: 8, padding: 16, font: { size: 12 } },
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              const value = context.raw;
+              const pct = total ? Math.round((value / total) * 100) : 0;
+              return `${context.label}: ${value} skill${value === 1 ? "" : "s"} (${pct}%)`;
+            },
+          },
+        },
+      },
+      onClick: (evt, elements) => {
+        // Clicking a slice scrolls to the matching skills in the checklist below
+        if (elements.length === 0) return;
+        const statusMap = ["have", "improve", "missing"];
+        const status = statusMap[elements[0].index];
+        const target = document.querySelector(`.timeline-item.${status}`);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "center" });
+      },
+    },
+    plugins: [
+      {
+        // Draws the overall % in the center of the doughnut
+        id: "centerText",
+        afterDraw(chart) {
+          const { ctx, chartArea } = chart;
+          const x = (chartArea.left + chartArea.right) / 2;
+          const y = (chartArea.top + chartArea.bottom) / 2;
+          ctx.save();
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.font = "700 22px sans-serif";
+          ctx.fillStyle = "#1e1b4b";
+          ctx.fillText(percent + "%", x, y - 8);
+          ctx.font = "500 11px sans-serif";
+          ctx.fillStyle = "#6b6785";
+          ctx.fillText("complete", x, y + 14);
+          ctx.restore();
+        },
+      },
+    ],
+  });
+}
   const list = document.getElementById("skillList");
   list.innerHTML = "";
   list.className = "timeline";

@@ -505,7 +505,8 @@ button[type="submit"]:hover { background: var(--primary-dark); }
 }
 
 .chat-bubble.assistant {
-  background: white;
+  background: var(--card);
+  color: var(--text);
   border: 1px solid var(--border);
   align-self: flex-start;
   border-bottom-left-radius: 4px;
@@ -790,4 +791,192 @@ button[type="submit"]:hover { background: var(--primary-dark); }
 
 .video-link:hover {
   text-decoration: underline;
+}/* ---- Guarantees dark mode wins over page-specific styles, regardless of file load order ---- */
+
+[data-theme="dark"] input,
+[data-theme="dark"] select,
+[data-theme="dark"] textarea {
+  background: #262038 !important;
+  border-color: #322d4d !important;
+  color: #f4f2ff !important;
+}
+
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #8b87a8 !important;
+}
+
+/* Skill tags (both the main style.css version and the profile page version) */
+[data-theme="dark"] .skill-tag {
+  background: #2c2748 !important;
+  color: #f4f2ff !important;
+}
+
+[data-theme="dark"] .skill-tag button {
+  color: #c9c6e6 !important;
+}
+
+/* Profile & Dashboard page cards and containers */
+[data-theme="dark"] .pf-body,
+[data-theme="dark"] .db-body {
+  background: #14121f !important;
+}
+
+[data-theme="dark"] .pf-card,
+[data-theme="dark"] .db-card,
+[data-theme="dark"] .db-focus {
+  background: #1f1c33 !important;
+  border-color: #322d4d !important;
+}
+
+[data-theme="dark"] .pf-heading,
+[data-theme="dark"] .db-heading,
+[data-theme="dark"] .pf-field label {
+  color: #f4f2ff !important;
+}
+
+[data-theme="dark"] .pf-sub,
+[data-theme="dark"] .db-sub {
+  color: #a9a5c9 !important;
+}
+
+/* Chat window and bubbles on the Assistant page */
+[data-theme="dark"] .chat-window {
+  background: #1a1729 !important;
+  border-color: #322d4d !important;
+}
+
+[data-theme="dark"] .chat-bubble.assistant {
+  background: #262038 !important;
+  color: #f4f2ff !important;
+  border-color: #322d4d !important;
+}
+
+/* Buttons that used var(--ink) as their background — --ink flips to a light
+   color in dark mode for text purposes, which broke these buttons */
+[data-theme="dark"] .pf-skill-row button,
+[data-theme="dark"] .take-quiz-btn,
+[data-theme="dark"] .submit-quiz-btn {
+  background: var(--primary) !important;
+  color: white !important;
+}
+
+[data-theme="dark"] .nav-links a:hover {
+  background: #2c2748 !important;
+  color: #f4f2ff !important;
+}
+
+[data-theme="dark"] .logo {
+  color: #f4f2ff !important;
+}
+
+[data-theme="dark"] .xp-toast {
+  background: #2c2748 !important;
+  color: #f4f2ff !important;
+}
+
+[data-theme="dark"] .nav-links a.active {
+  background: var(--primary) !important;
+  color: white !important;
+}
+.up-next-banner {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: #fff8e6;
+  border: 1px solid #f3e2b0;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: #6b5c1f;
+}
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  background: #14121f;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 18px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.app-logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  margin-bottom: 28px;
+  padding: 0 10px;
+}
+
+.app-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.app-nav a {
+  color: #a9a5c9;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.app-nav a:hover {
+  background: #1f1c33;
+  color: white;
+}
+
+.app-nav a.active {
+  background: #4a47d1;
+  color: white;
+}
+
+.app-theme-toggle {
+  margin: 10px 0;
+  align-self: flex-start;
+}
+
+.app-logout {
+  background: none;
+  border: 1px solid #322d4d;
+  color: #a9a5c9;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.app-main {
+  flex: 1;
+  padding: 32px;
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .app-shell {
+    flex-direction: column;
+  }
+  .app-sidebar {
+    width: 100%;
+    height: auto;
+    position: static;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    padding: 12px 16px;
+  }
+  .app-nav {
+    flex-direction: row;
+  }
+  .app-logo { margin-bottom: 0; margin-right: 16px; }
 }

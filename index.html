@@ -18,21 +18,30 @@
 </head>
 <body class="pf-body">
 
-  <nav class="navbar">
-    <div class="logo">SkillBridge</div>
-    <div class="nav-links">
-      <a href="index.html" class="active">Profile</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="assessment.html">Assessment</a>
-      <a href="resume.html">Resume</a>
-      <a href="assistant.html">Assistant</a>
-      <a href="dashboard.html">Dashboard</a>
-      <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
-      <a href="#" onclick="logout(); return false;">Log out</a>
-    </div>
-  </nav>
+  <div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="app-logo">🎯 SkillBridge</div>
+    <nav class="app-nav">
+      <a href="dashboard.html">▦ Dashboard</a>
+      <a href="index.html" class="active">👤 Profile</a>
+      <a href="roadmap.html">🧭 Roadmap</a>
+      <a href="assessment.html">📝 Assessment</a>
+      <a href="resume.html">📄 Resume</a>
+      <a href="projects.html">🔗 Projects</a>
+      <a href="assistant.html">💬 Assistant</a>
+      <a href="badges.html">🏅 Badges</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle app-theme-toggle" type="button">🌙</button>
+    <button class="app-logout" onclick="logout()">⎋ Log out</button>
+  </aside>
 
-  <main class="pf-main">
+  <main class="app-main">
+    <!-- existing page content goes here -->
+  </main>
+</div>
+
+  <main class="app-main">
+    <div class="pf-main">
     <div class="pf-intro">
       <p class="pf-eyebrow">STEP ONE</p>
       <h1 class="pf-heading">Tell us where you're starting from</h1>
@@ -93,6 +102,7 @@
     </form>
 
     <div id="savedMessage" class="pf-saved hidden">✅ Saved — head to your Roadmap to see where you stand.</div>
+  </div>
   </main>
 
   <script type="module">

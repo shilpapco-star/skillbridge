@@ -17,21 +17,29 @@
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="logo">SkillBridge</div>
-   <div class="nav-links">
-  <a href="index.html">Profile</a>
-  <a href="roadmap.html">Roadmap</a>
-  <a href="assessment.html">Assessment</a>
-  <a href="resume.html">Resume</a>
-  <a href="assistant.html">Assistant</a>
-  <a href="dashboard.html">Dashboard</a>
- <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
-  <a href="#" onclick="logout(); return false;">Log out</a>
+  <div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="app-logo">🎯 SkillBridge</div>
+    <nav class="app-nav">
+      <a href="dashboard.html">▦ Dashboard</a>
+      <a href="index.html">👤 Profile</a>
+      <a href="roadmap.html">🧭 Roadmap</a>
+      <a href="assessment.html" class="active">📝 Assessment</a>
+      <a href="resume.html">📄 Resume</a>
+      <a href="projects.html">🔗 Projects</a>
+      <a href="assistant.html">💬 Assistant</a>
+      <a href="badges.html">🏅 Badges</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle app-theme-toggle" type="button">🌙</button>
+    <button class="app-logout" onclick="logout()">⎋ Log out</button>
+  </aside>
+
+  <main class="app-main">
+    <!-- existing page content goes here -->
+  </main>
 </div>
-  </nav>
-<div class="gami-bar" id="gamificationBar"></div>
-  <main class="container wide">
+  <main class="app-main">
+    <div class="container">
     <div id="noProfile" class="hidden">
       <h1>No profile found</h1>
       <p class="subtitle">
@@ -45,18 +53,15 @@
 
       <div id="skillCards" class="skill-cards"></div>
     </div>
+    </div>
   </main>
 
-  <script src="js/assessment.js"></script>
-  <script src="js/auth.js"></script>
-<script>requireAuth();</script>
-<script src="js/gamification.js"></script>
-<script src="js/script.js"></script>  <!-- or whatever that page already has -->
-  <script src="js/gamification.js"></script>
-<script type="module">
+  <script type="module">
   import { requireAuth } from "./js/auth.js";
   requireAuth();
-</script> <!-- (or roadmap.js / assessment.js / etc — whatever that page already has) -->
+</script>
+<script src="js/gamification.js"></script>
 <script src="js/theme.js"></script>
+<script src="js/assessment.js"></script>
 </body>
 </html>

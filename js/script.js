@@ -120,6 +120,11 @@ form.addEventListener("submit", async (e) => {
       window.SkillBridgeGamification.addXP(10, "Profile saved");
       window.SkillBridgeGamification.unlockBadge("first_profile");
     }
+
+    // Give the student a moment to see the "saved" confirmation, then move them forward
+    setTimeout(() => {
+      window.location.href = "roadmap.html";
+    }, 1200);
   } catch (err) {
     console.error("Error saving profile:", err);
     alert("Something went wrong saving your profile. Check the console for details.");

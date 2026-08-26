@@ -17,27 +17,31 @@
 </head>
 <body>
 
-  <nav class="navbar">
-    <div class="logo">SkillBridge</div>
-    <div class="nav-links">
-      <a href="index.html">Profile</a>
-      <a href="roadmap.html">Roadmap</a>
-      <a href="assessment.html">Assessment</a>
-      <a href="resume.html">Resume</a>
-      <a href="assistant.html">Assistant</a>
-      <a href="dashboard.html">Dashboard</a>
-      <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
-      <a href="#" onclick="logout(); return false;">Log out</a>
-    </div>
-  </nav>
-  <div class="gami-bar" id="gamificationBar"></div>
-  
+  <div class="app-shell">
+  <aside class="app-sidebar">
+    <div class="app-logo">🎯 SkillBridge</div>
+    <nav class="app-nav">
+      <a href="dashboard.html">▦ Dashboard</a>
+      <a href="index.html">👤 Profile</a>
+      <a href="roadmap.html">🧭 Roadmap</a>
+      <a href="assessment.html">📝 Assessment</a>
+      <a href="resume.html">📄 Resume</a>
+      <a href="projects.html">🔗 Projects</a>
+      <a href="assistant.html">💬 Assistant</a>
+      <a href="badges.html" class="active">🏅 Badges</a>
+    </nav>
+    <button id="themeToggle" class="theme-toggle app-theme-toggle" type="button">🌙</button>
+    <button class="app-logout" onclick="logout()">⎋ Log out</button>
+  </aside>
 
-  <main class="container wide">
+  
+  <main class="app-main">
+    <div class="container">
     <h1>Your badges</h1>
     <p class="subtitle">Earned by taking real action across SkillBridge.</p>
 
     <div id="badgeGrid" class="badge-grid"></div>
+  </div>
   </main>
 <script type="module">
   import { requireAuth } from "./js/auth.js";
