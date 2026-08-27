@@ -3,135 +3,250 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-  (function() {
-    const saved = localStorage.getItem("skillbridge_theme") || "light";
-    document.documentElement.setAttribute("data-theme", saved);
-  })();
-</script>
-  <title>SkillBridge — Log in</title>
+  <title>SkillBridge — Sign in</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
   <style>
-  body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    background: #f4f3fb;
-  }
-  .bg-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    opacity: 0.5;
-    animation: drift 14s ease-in-out infinite alternate;
-  }
-  .bg-blob.one {
-    width: 320px; height: 320px;
-    background: #a5a0f0;
-    top: -60px; left: -60px;
-  }
-  .bg-blob.two {
-    width: 280px; height: 280px;
-    background: #f0c96a;
-    bottom: -80px; right: -40px;
-    animation-delay: -6s;
-  }
-  .bg-blob.three {
-    width: 220px; height: 220px;
-    background: #7dd7c9;
-    bottom: 20%; left: 15%;
-    animation-delay: -3s;
-  }
-  @keyframes drift {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(30px, -30px) scale(1.15); }
-  }
-  .auth-card {
-    position: relative;
-    z-index: 1;
-    max-width: 380px;
-    width: 90%;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 36px 32px;
-    box-shadow: 0 20px 50px -20px rgba(74, 71, 209, 0.3);
-  }
-  .auth-logo {
-    font-weight: 800;
-    font-size: 22px;
-    color: var(--primary);
-    text-align: center;
-    margin-bottom: 4px;
-  }
-  .auth-tagline {
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-  }
-  .auth-toggle {
-    display: flex;
-    background: var(--bg);
-    border-radius: 999px;
-    padding: 4px;
-    margin-bottom: 20px;
-  }
-  .auth-toggle button {
-    flex: 1;
-    border: none;
-    background: none;
-    padding: 8px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-muted);
-    cursor: pointer;
-  }
-  .auth-toggle button.active {
-    background: white;
-    color: var(--primary);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-  }
-  .auth-error {
-    color: #b23c3c;
-    font-size: 13px;
-    margin-top: 10px;
-    display: none;
-  }
-  .auth-error.show { display: block; }
-</style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    body { margin: 0; font-family: "Inter", sans-serif; }
+
+    .login-shell {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ---- Left: animated brand panel ---- */
+    .login-brand {
+      flex: 1.1;
+      position: relative;
+      overflow: hidden;
+      background: #14121f;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px;
+    }
+
+    .login-brand::before,
+    .login-brand::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.55;
+      animation: drift 16s ease-in-out infinite alternate;
+    }
+    .login-brand::before {
+      width: 380px; height: 380px;
+      background: #4a47d1;
+      top: -100px; left: -100px;
+    }
+    .login-brand::after {
+      width: 320px; height: 320px;
+      background: #e3a008;
+      bottom: -100px; right: -60px;
+      animation-delay: -8s;
+    }
+    @keyframes drift {
+      from { transform: translate(0,0) scale(1); }
+      to { transform: translate(40px,-30px) scale(1.2); }
+    }
+
+    .login-brand-content { position: relative; z-index: 1; max-width: 420px; }
+
+    .login-logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 800;
+      font-size: 26px;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .login-headline {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 16px;
+    }
+
+    .login-sub {
+      color: #c9c6e6;
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin: 0 0 32px;
+    }
+
+    .login-features {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .login-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13.5px;
+      color: #e5e3f5;
+      opacity: 0;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .login-features li:nth-child(1) { animation-delay: 0.2s; }
+    .login-features li:nth-child(2) { animation-delay: 0.4s; }
+    .login-features li:nth-child(3) { animation-delay: 0.6s; }
+    .login-features li:nth-child(4) { animation-delay: 0.8s; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-feature-icon {
+      width: 30px; height: 30px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ---- Right: auth card ---- */
+    .login-panel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f4f3fb;
+      padding: 40px 24px;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 380px;
+      background: rgba(255,255,255,0.75);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 20px;
+      padding: 38px 34px;
+      box-shadow: 0 30px 60px -30px rgba(74, 71, 209, 0.35);
+      animation: cardIn 0.5s ease;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .auth-title { font-family:"Space Grotesk",sans-serif; font-size: 20px; font-weight: 700; margin: 0 0 4px; color:#1e1b4b; }
+    .auth-caption { font-size: 13px; color: #6b6785; margin: 0 0 24px; }
+
+    .auth-method-toggle {
+      display: flex;
+      background: #ecebf5;
+      border-radius: 999px;
+      padding: 4px;
+      margin-bottom: 22px;
+    }
+    .auth-method-toggle button {
+      flex: 1; border: none; background: none; padding: 8px;
+      border-radius: 999px; font-size: 12.5px; font-weight: 600;
+      color: #6b6785; cursor: pointer; transition: 0.2s;
+    }
+    .auth-method-toggle button.active { background: white; color: #4a47d1; box-shadow: 0 1px 6px rgba(0,0,0,0.08); }
+
+    .auth-field label { display:block; font-size:12.5px; font-weight:600; color:#6b6785; margin-bottom:6px; }
+    .auth-field input {
+      width: 100%; padding: 12px 14px; border-radius: 10px;
+      border: 1.5px solid #e5e3f0; font-size: 14px; background: rgba(255,255,255,0.8);
+      margin-bottom: 16px; outline: none; transition: border-color .15s;
+    }
+    .auth-field input:focus { border-color: #4a47d1; }
+
+    .auth-submit {
+      width: 100%; padding: 13px; border: none; border-radius: 10px;
+      background: linear-gradient(135deg,#4a47d1,#6a63f5); color: white;
+      font-weight: 700; font-size: 14px; cursor: pointer;
+      transition: transform .15s;
+    }
+    .auth-submit:hover { transform: translateY(-1px); }
+
+    .auth-status { font-size: 13px; margin-top: 14px; padding: 10px 12px; border-radius: 8px; display:none; }
+    .auth-status.show { display: block; }
+    .auth-status.error { background: #fdeeee; color: #b23c3c; }
+    .auth-status.info { background: #ecebfc; color: #4a47d1; }
+    .auth-status.success { background: #e8f7ee; color: #1f7a45; }
+
+    .auth-toggle-mode {
+      text-align: center; margin-top: 18px; font-size: 12.5px; color: #6b6785;
+    }
+    .auth-toggle-mode a { color: #4a47d1; font-weight: 600; text-decoration: none; cursor: pointer; }
+
+    @media (max-width: 860px) {
+      .login-brand { display: none; }
+    }
+  </style>
 </head>
 <body>
-<div class="bg-blob one"></div>
-<div class="bg-blob two"></div>
-<div class="bg-blob three"></div>
 
-  <div class="auth-card">
-    <div class="auth-logo">🎯 SkillBridge</div>
-    <p class="auth-tagline">Your personal path from where you are to where you want to be.</p>
-
-    <div class="auth-toggle">
-      <button type="button" id="loginTab" class="active">Log in</button>
-      <button type="button" id="signupTab">Sign up</button>
+  <div class="login-shell">
+    <div class="login-brand">
+      <div class="login-brand-content">
+        <div class="login-logo">🎯 SkillBridge</div>
+        <h1 class="login-headline">Bridge your skills.<br/>Build your future.</h1>
+        <p class="login-sub">A personalized path from where you are today to the career you're aiming for.</p>
+        <ul class="login-features">
+          <li><span class="login-feature-icon">🧭</span> Personalized skill roadmap</li>
+          <li><span class="login-feature-icon">📝</span> Verified skill assessments</li>
+          <li><span class="login-feature-icon">🔗</span> Real project discovery</li>
+          <li><span class="login-feature-icon">💬</span> Built-in career assistant</li>
+        </ul>
+      </div>
     </div>
 
-    <form id="authForm">
-      <label for="authEmail">Email</label>
-      <input type="email" id="authEmail" required placeholder="you@example.com" />
+    <div class="login-panel">
+      <div class="auth-card">
+        <h2 class="auth-title" id="authTitle">Welcome to SkillBridge</h2>
+        <p class="auth-caption" id="authCaption">Sign in with a secure emailed link — no password needed.</p>
 
-      <label for="authPassword">Password</label>
-      <input type="password" id="authPassword" required placeholder="••••••••" minlength="4" />
+        <div class="auth-method-toggle">
+          <button type="button" id="linkTab" class="active">Email Link</button>
+          <button type="button" id="passwordTab">Password</button>
+        </div>
 
-      <button type="submit" id="authSubmitBtn">Log in</button>
-      <p class="auth-error" id="authError"></p>
-    </form>
+        <!-- ---- Email Link (OTP-style) flow ---- -->
+        <form id="linkForm">
+          <div class="auth-field">
+            <label for="linkEmail">Email address</label>
+            <input type="email" id="linkEmail" required placeholder="you@example.com" />
+          </div>
+          <button type="submit" class="auth-submit">Send sign-in link</button>
+        </form>
+
+        <!-- ---- Password fallback flow (hidden by default) ---- -->
+        <form id="authForm" style="display:none;">
+          <div class="auth-field">
+            <label for="authEmail">Email</label>
+            <input type="email" id="authEmail" required placeholder="you@example.com" />
+          </div>
+          <div class="auth-field">
+            <label for="authPassword">Password</label>
+            <input type="password" id="authPassword" required placeholder="••••••••" minlength="6" />
+          </div>
+          <button type="submit" class="auth-submit" id="authSubmitBtn">Log in</button>
+          <p class="auth-toggle-mode">
+            <a id="loginTab">Log in</a> · <a id="signupTab">Sign up</a>
+          </p>
+        </form>
+
+        <p class="auth-status" id="authStatus"></p>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="js/auth.js"></script>

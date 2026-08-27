@@ -103,11 +103,11 @@ function renderSkillChart(results) {
   new Chart(canvas, {
     type: "doughnut",
     data: {
-      labels: ["Verified", "Needs improvement", "Not started"],
+      labels: ["Completed", "In Progress", "Not Started"],
       datasets: [
         {
           data: [have, improve, missing],
-          backgroundColor: ["#2fa96b", "#d99a2b", "#e15c5c"],
+          backgroundColor: ["#4a47d1", "#e3a008", "#cbd1dc"],
           borderWidth: 3,
           borderColor: "#ffffff",
           hoverOffset: 12,
@@ -133,7 +133,6 @@ function renderSkillChart(results) {
         },
       },
       onClick: (evt, elements) => {
-        // Clicking a slice scrolls to the matching skills in the checklist below
         if (elements.length === 0) return;
         const statusMap = ["have", "improve", "missing"];
         const status = statusMap[elements[0].index];
@@ -143,7 +142,6 @@ function renderSkillChart(results) {
     },
     plugins: [
       {
-        // Draws the overall % in the center of the doughnut
         id: "centerText",
         afterDraw(chart) {
           const { ctx, chartArea } = chart;
