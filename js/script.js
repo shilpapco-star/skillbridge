@@ -1,132 +1,15 @@
 import { auth, db } from "./firebase-config.js";
-import {
-  doc,
-  setDoc,
-  getDoc,
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-// ---- State ----
-let currentSkills = [];
-
-const skillInput = document.getElementById("skillInput");
-const skillTagsContainer = document.getElementById("skillTags");
-const form = document.getElementById("profileForm");
-const savedMessage = document.getElementById("savedMessage");
-
-// ---- Add a skill tag when the user presses Enter ----
-skillInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    e.preventDefault();
-    const value = skillInput.value.trim();
-    if (value && !currentSkills.includes(value)) {
-      currentSkills.push(value);
-      renderSkillTags();
-    }
-    skillInput.value = "";
-  }
-});
-
-// ---- Fallback "Add" button (in case Enter is intercepted by autofill) ----
-document.getElementById("addSkillBtn").addEventListener("click", () => {
-  const value = skillInput.value.trim();
-  if (value && !currentSkills.includes(value)) {
-    currentSkills.push(value);
-    renderSkillTags();
-  }
-  skillInput.value = "";
-});
-
-// ---- Render the skill tags below the input ----
-function renderSkillTags() {
-  skillTagsContainer.innerHTML = "";
-  currentSkills.forEach((skill, index) => {
-    const tag = document.createElement("div");
-    tag.className = "skill-tag";
-    tag.innerHTML = `${skill} <button type="button" data-index="${index}">&times;</button>`;
-    skillTagsContainer.appendChild(tag);
-  });
-
-  document.querySelectorAll(".skill-tag button").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      const i = Number(e.target.dataset.index);
-      currentSkills.splice(i, 1);
-      renderSkillTags();
-    });
-  });
-}
-
-// ---- Fill the form from a profile object (used by both localStorage and Firestore loads) ----
-function fillForm(profile) {
-  document.getElementById("name").value = profile.name || "";
-  document.getElementById("education").value = profile.education || "";
-  document.getElementById("branch").value = profile.branch || "";
-  document.getElementById("year").value = profile.year || "";
-  document.getElementById("targetRole").value = profile.targetRole || "";
-  currentSkills = profile.skills || [];
-  renderSkillTags();
-}
-
-// ---- On load: try Firestore first (source of truth), fall back to localStorage cache ----
-onAuthStateChanged(auth, async (user) => {
-  if (!user) return; // requireAuth() (loaded separately) handles the redirect
-
-  const docRef = doc(db, "profiles", user.uid);
-  const snapshot = await getDoc(docRef);
-
-  if (snapshot.exists()) {
-    const profile = snapshot.data();
-    fillForm(profile);
-    localStorage.setItem("skillbridge_profile", JSON.stringify(profile)); // keep cache in sync
-  } else {
-    // No cloud profile yet — fall back to any local cache (e.g. first-time migration)
-    const cached = localStorage.getItem("skillbridge_profile");
-    if (cached) fillForm(JSON.parse(cached));
-  }
-});
-
-// ---- Save the profile: to Firestore (real database) AND localStorage (fast local cache) ----
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
-
-  const user = auth.currentUser;
-  if (!user) {
-    alert("You must be logged in to save a profile.");
-    return;
-  }
-
-  const profile = {
-    name: document.getElementById("name").value,
-    education: document.getElementById("education").value,
-    branch: document.getElementById("branch").value,
-    year: document.getElementById("year").value,
-    targetRole: document.getElementById("targetRole").value,
-    skills: currentSkills,
-    email: user.email,
-  };
-
-  try {
-    // Save to Firestore — this is the real, persistent database record
-    await setDoc(doc(db, "profiles", user.uid), profile, { merge: true });
-
-    // Keep localStorage in sync so the rest of the app (roadmap, dashboard, etc.)
-    // keeps working exactly as before without needing changes today
-    localStorage.setItem("skillbridge_profile", JSON.stringify(profile));
-
-    savedMessage.classList.remove("hidden");
-    console.log("Saved profile to Firestore:", profile);
-
-    if (window.SkillBridgeGamification) {
-      window.SkillBridgeGamification.addXP(10, "Profile saved");
-      window.SkillBridgeGamification.unlockBadge("first_profile");
-    }
-
-    // Give the student a moment to see the "saved" confirmation, then move them forward
-    setTimeout(() => {
-      window.location.href = "roadmap.html";
-    }, 1200);
-  } catch (err) {
-    console.error("Error saving profile:", err);
-    alert("Something went wrong saving your profile. Check the console for details.");
-  }
-});
+let currentSkills=[],avatar="";
+const $=id=>document.getElementById(id);
+function initials(name="SkillBridge"){return name.split(" ").filter(Boolean).slice(0,2).map(x=>x[0]).join("").toUpperCase()}
+function renderAvatar(){const img=$("avatarImage"),initial=$("avatarInitials");initial.textContent=initials($("name").value);if(avatar){img.src=avatar;img.classList.add("show")}else{img.removeAttribute("src");img.classList.remove("show")}}
+function renderSkills(){$("skillTags").innerHTML=currentSkills.map((skill,i)=>`<span class="skill-tag">${skill}<button type="button" data-i="${i}" aria-label="Remove ${skill}">×</button></span>`).join("");document.querySelectorAll("#skillTags button").forEach(b=>b.onclick=()=>{currentSkills.splice(+b.dataset.i,1);renderSkills()})}
+function fill(profile,user){$("name").value=profile.name||"";$("email").value=user.email||profile.email||"";$("education").value=profile.education||"";$("branch").value=profile.branch||"";$("year").value=profile.year||"";$("targetRole").value=profile.targetRole||"";currentSkills=profile.skills||[];avatar=profile.avatar||"";renderSkills();renderAvatar()}
+function addSkill(){const value=$("skillInput").value.trim();if(value&&!currentSkills.some(s=>s.toLowerCase()===value.toLowerCase())){currentSkills.push(value);renderSkills()}$("skillInput").value=""}
+$("addSkillBtn").onclick=addSkill;$("skillInput").onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();addSkill()}};$("name").oninput=renderAvatar;
+$("avatarInput").onchange=e=>{const file=e.target.files[0];if(!file)return;if(file.size>3*1024*1024){alert("Please choose an image smaller than 3 MB.");e.target.value="";return}const image=new Image();image.onload=()=>{const size=Math.min(320,Math.max(image.width,image.height)),canvas=document.createElement("canvas");canvas.width=canvas.height=size;const ctx=canvas.getContext("2d"),scale=Math.max(size/image.width,size/image.height),w=image.width*scale,h=image.height*scale;ctx.drawImage(image,(size-w)/2,(size-h)/2,w,h);avatar=canvas.toDataURL("image/jpeg",.8);renderAvatar()};image.src=URL.createObjectURL(file)};
+$("removePhoto").onclick=()=>{avatar="";$("avatarInput").value="";renderAvatar()};
+onAuthStateChanged(auth,async user=>{if(!user)return;const cached=JSON.parse(localStorage.getItem("skillbridge_profile")||"{}");try{const snap=await getDoc(doc(db,"profiles",user.uid));fill(snap.exists()?{...cached,...snap.data()}:cached,user)}catch{fill(cached,user)}});
+$("profileForm").onsubmit=async e=>{e.preventDefault();const user=auth.currentUser;if(!user)return;const profile={name:$("name").value.trim(),education:$("education").value.trim(),branch:$("branch").value.trim(),year:$("year").value,targetRole:$("targetRole").value,skills:currentSkills,email:user.email,avatar};try{await setDoc(doc(db,"profiles",user.uid),profile,{merge:true});localStorage.setItem("skillbridge_profile",JSON.stringify(profile));$("savedMessage").textContent="Changes saved — your plan is up to date.";if(window.SkillBridgeGamification)window.SkillBridgeGamification.addXP(10,"Settings updated")}catch(err){console.error(err);$("savedMessage").textContent="Couldn’t save right now. Please try again."}};

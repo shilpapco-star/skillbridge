@@ -1,113 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>
-    (function() {
-      const saved = localStorage.getItem("skillbridge_theme") || "light";
-      document.documentElement.setAttribute("data-theme", saved);
-    })();
-  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkillBridge — Dashboard</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
+  <script>(function(){document.documentElement.setAttribute("data-theme",localStorage.getItem("skillbridge_theme")||"light")})();</script>
+  <title>SkillBridge — Your learning space</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/dashboard2.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 </head>
 <body class="d2-body">
-
-  <div id="noProfile" class="hidden d2-empty">
-    <h1>No profile found</h1>
-    <p class="subtitle"><a href="index.html">Create your profile</a> first to see your dashboard.</p>
-  </div>
-
-  <div id="dashboardShell" class="d2-shell hidden">
-
+  <div id="dashboardShell" class="d2-shell">
     <aside class="d2-sidebar">
-      <div class="d2-logo">🎯 SkillBridge</div>
+      <a class="d2-logo" href="dashboard.html"><span>✦</span> skillbridge</a>
       <nav class="d2-nav">
-        <a href="dashboard.html" class="active">▦ Dashboard</a>
-        <a href="index.html">👤 Profile</a>
-        <a href="roadmap.html">🧭 Roadmap</a>
-        <a href="assessment.html">📝 Assessment</a>
-        <a href="resume.html">📄 Resume</a>
-        <a href="projects.html">🔗 Projects</a>
-        <a href="assistant.html">💬 Assistant</a>
+        <a href="dashboard.html" class="active"><span>▦</span> Overview</a>
+        <a href="learn.html"><span>▶</span> Learn</a>
+        <a href="roadmap.html"><span>⌁</span> My roadmap</a>
+        <a href="projects.html"><span>◈</span> Projects</a>
+        <a href="assessment.html"><span>✓</span> Assessments</a>
+        <a href="#hackathons"><span>⚡</span> Hackathons</a>
+        <a href="assistant.html"><span>◌</span> Career assistant</a>
       </nav>
-      <button class="d2-logout" onclick="logout()">⎋ Log out</button>
+      <div class="d2-sidebar-bottom">
+        <a class="d2-settings-link" href="index.html">⚙ Settings</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle colour theme">🌙</button>
+        <button class="d2-logout" onclick="logout()">↪ Log out</button>
+      </div>
     </aside>
-
     <main class="d2-main">
       <header class="d2-header">
-        <h1>Dashboard</h1>
-        <div class="d2-header-actions">
-          <button id="themeToggle" class="theme-toggle" type="button">🌙</button>
-          <a href="projects.html" class="d2-search">🔍 Search skills, projects...</a>
-        </div>
+        <div><p class="d2-kicker">YOUR SPACE</p><h1>Good to see you, <span id="d2FirstName">there</span> <span aria-hidden="true">✦</span></h1></div>
+        <div class="d2-header-actions"><a href="index.html" class="d2-avatar-button" title="Open settings"><img id="headerAvatar" alt="Your profile photo" /><span id="headerInitials">SB</span></a></div>
       </header>
-
-      <div class="d2-welcome">
-        <h2 id="d2Welcome">Welcome back 👋</h2>
-        <a href="roadmap.html" class="d2-btn-outline">View Roadmap →</a>
-      </div>
-
-      <div class="d2-grid">
-        <div class="d2-card d2-analytics">
-          <div class="d2-card-header">
-            <h3>Skill Coverage</h3>
-          </div>
-          <canvas id="coverageDonut" width="180" height="180"></canvas>
-          <div class="d2-stats-row">
-            <div class="d2-mini-stat">
-              <strong id="haveCountStat">0</strong>
-              <span>Completed</span>
-            </div>
-            <div class="d2-mini-stat">
-              <strong id="totalCountStat">0</strong>
-              <span>Total skills</span>
-            </div>
-          </div>
+      <section class="d2-hero">
+        <div class="d2-hero-copy">
+          <span class="d2-pill">YOUR NEXT FOCUS</span>
+          <h2 id="focusTitle">Build momentum, one skill at a time.</h2>
+          <p id="focusText">Set up your learning profile to get a personal recommendation.</p>
+          <div class="d2-hero-actions"><a id="focusCta" href="index.html" class="d2-btn-primary">Set up my plan <span>→</span></a><a href="learn.html" class="d2-btn-ghost">Browse lessons</a></div>
         </div>
-
-        <div class="d2-card d2-skills-table">
-          <div class="d2-card-header">
-            <h3>Your Skills <span id="skillCountLabel" class="d2-count-badge">0</span></h3>
-            <a href="assessment.html" class="d2-btn-fill">+ Take a test</a>
-          </div>
-          <table class="d2-table">
-            <thead>
-              <tr><th>Skill</th><th>Status</th><th>Est. Time</th><th>Progress</th></tr>
-            </thead>
-            <tbody id="skillsTableBody"></tbody>
-          </table>
-        </div>
-      </div>
+        <div class="d2-orbit" aria-hidden="true"><div class="d2-orbit-core">⌁</div><span class="orb orb-one">HTML</span><span class="orb orb-two">CSS</span><span class="orb orb-three">JS</span></div>
+      </section>
+      <section class="d2-stats" aria-label="Learning summary">
+        <article><span class="d2-stat-icon violet">◒</span><div><strong id="coverageStat">0%</strong><p>Path complete</p></div></article>
+        <article><span class="d2-stat-icon peach">▣</span><div><strong id="skillStat">0</strong><p>Skills covered</p></div></article>
+        <article><span class="d2-stat-icon mint">⏱</span><div><strong id="timeStat">0h</strong><p>Learning time</p></div></article>
+        <article><span class="d2-stat-icon blue">⚡</span><div><strong id="streakStat">0</strong><p>Day streak</p></div></article>
+      </section>
+      <section class="d2-section">
+        <div class="d2-section-heading"><div><p class="d2-kicker">KEEP LEARNING</p><h2>Continue your path</h2></div><a href="roadmap.html">See full roadmap →</a></div>
+        <div id="continueGrid" class="d2-continue-grid"></div>
+      </section>
+      <section id="hackathons" class="d2-section d2-hack-section">
+        <div class="d2-section-heading"><div><p class="d2-kicker">OPPORTUNITIES</p><h2>Hackathons & challenges</h2></div><a href="https://devpost.com/hackathons" target="_blank" rel="noopener">View all opportunities ↗</a></div>
+        <p class="d2-section-note">A hand-picked launchpad for finding active events. Always confirm deadlines and eligibility on the host site.</p>
+        <div id="hackathonGrid" class="d2-hack-grid"></div>
+      </section>
     </main>
-
-    <aside class="d2-right">
-      <div class="d2-profile-card">
-        <div class="d2-avatar">🧑‍💻</div>
-        <h3 id="profileName">—</h3>
-        <p id="profileRole">—</p>
-        <a href="index.html" class="d2-btn-outline-white">Edit profile</a>
-      </div>
-
-      <div class="d2-status-card">
-        <h3>Achievements</h3>
-        <div id="badgeStatusList"></div>
-      </div>
-    </aside>
-
   </div>
-
   <script src="js/theme.js"></script>
-  <script type="module">
-    import { requireAuth } from "./js/auth.js";
-    requireAuth();
-  </script>
+  <script type="module">import { requireAuth } from "./js/auth.js"; requireAuth();</script>
   <script src="js/gamification.js"></script>
   <script src="js/dashboard.js"></script>
 </body>
