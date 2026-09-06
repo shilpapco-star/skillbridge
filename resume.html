@@ -12,36 +12,40 @@
   <title>SkillBridge — Resume Analysis</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
   <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/dashboard2.css" />
 </head>
 <body>
 
-  <div class="app-shell">
-  <aside class="app-sidebar">
-    <div class="app-logo">🎯 SkillBridge</div>
-    <nav class="app-nav">
-      <a href="dashboard.html">▦ Dashboard</a>
-      <a href="index.html">⚙ Settings</a>
-      <a href="roadmap.html">🧭 Roadmap</a>
-      <a href="assessment.html">📝 Assessment</a>
-      <a href="resume.html" class="active">📄 Resume</a>
-      <a href="projects.html">🔗 Projects</a>
-      <a href="assistant.html">💬 Assistant</a>
-      <a href="badges.html">🏅 Badges</a>
+  <div class="d2-shell">
+  <aside class="d2-sidebar">
+    <a class="d2-logo" href="dashboard.html"><span>✦</span> skillbridge</a>
+    <nav class="d2-nav">
+      <a href="dashboard.html"><span>▦</span> Overview</a>
+      <a href="learn.html"><span>▶</span> Learn</a>
+      <a href="roadmap.html"><span>⌁</span> My roadmap</a>
+      <a href="projects.html"><span>◈</span> Projects</a>
+      <a href="assessment.html"><span>✓</span> Assessments</a>
+      <a href="resume.html" class="active"><span>▤</span> Resume</a>
+      <a href="assistant.html"><span>◌</span> Career assistant</a>
+      <a href="badges.html"><span>🏅</span> Badges</a>
+      <a href="dashboard.html#hackathons"><span>⚡</span> Hackathons</a>
     </nav>
-    <button id="themeToggle" class="theme-toggle app-theme-toggle" type="button">🌙</button>
-    <button class="app-logout" onclick="logout()">⎋ Log out</button>
+    <div class="d2-sidebar-bottom">
+      <a class="d2-settings-link" href="index.html">⚙ Settings</a>
+      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle colour theme">🌙</button>
+      <button class="d2-logout" onclick="logout()">↪ Log out</button>
+    </div>
   </aside>
 
- 
-  <div id="noProfile" class="hidden">
-    <h1>No profile found</h1>
-    <p class="subtitle">
-      Please <a href="index.html">create your profile</a> first to analyze your resume.
-    </p>
-  </div>
-
-  <main class="app-main">
+  <main class="d2-main">
     <div class="container">
+    <div id="noProfile" class="hidden">
+      <h1>No profile found</h1>
+      <p class="subtitle">
+        Please <a href="index.html">create your profile</a> first to analyze your resume.
+      </p>
+    </div>
     <div id="resumeContent" class="hidden">
       <h1>Resume skill analysis</h1>
       <p class="subtitle">Paste your resume text below. We'll extract technical skills and compare them to your target role.</p>
@@ -62,6 +66,7 @@
     </div>
     </div>
   </main>
+</div>
 
   <script src="js/theme.js"></script>
   <script type="module">
