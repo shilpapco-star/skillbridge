@@ -1,77 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-  (function() {
-    const saved = localStorage.getItem("skillbridge_theme") || "light";
-    document.documentElement.setAttribute("data-theme", saved);
-  })();
-</script>
-  <title>SkillBridge — Career Assistant</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/dashboard2.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-  <div class="d2-shell">
-  <aside class="d2-sidebar">
-    <a class="d2-logo" href="dashboard.html"><span>✦</span> skillbridge</a>
-    <nav class="d2-nav">
-      <a href="dashboard.html"><span>▦</span> Overview</a>
-      <a href="learn.html"><span>▶</span> Learn</a>
-      <a href="roadmap.html"><span>⌁</span> My roadmap</a>
-      <a href="projects.html"><span>◈</span> Projects</a>
-      <a href="assessment.html"><span>✓</span> Assessments</a>
-      <a href="resume.html"><span>▤</span> Resume</a>
-      <a href="assistant.html" class="active"><span>◌</span> Career assistant</a>
-      <a href="badges.html"><span>🏅</span> Badges</a>
-      <a href="dashboard.html#hackathons"><span>⚡</span> Hackathons</a>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>document.documentElement.setAttribute('data-theme',localStorage.getItem('skillbridge_theme')||'dark');</script><title>SkillBridge — AI Career Copilot</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0;1&display=swap" rel="stylesheet"><link rel="stylesheet" href="./css/style.css"><link rel="stylesheet" href="./css/dashboard2.css"><link rel="stylesheet" href="./css/app-pages.css"><link rel="stylesheet" href="./css/assistant.css">  <link rel="stylesheet" href="./css/theme-fix.css">
+</head><body class="sb-dashboard"><div class="sb-app"><aside class="sb-sidebar">
+  <div class="sb-sidebar-top">
+    <a href="dashboard.html" class="sb-brand"><span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span><span><strong>SkillBridge</strong><small>AI Career Engine</small></span></a>
+    <a href="assessment.html" class="sb-launch"><span class="material-symbols-outlined">bolt</span>Launch AI Assessment</a>
+    <nav class="sb-navigation" aria-label="Main navigation">
+      <a href="dashboard.html" class="sb-nav-item" data-page="dashboard.html"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
+      <a href="assessment.html" class="sb-nav-item" data-page="assessment.html"><span class="material-symbols-outlined">quiz</span><span>Assessment</span></a>
+      <a href="roadmap.html" class="sb-nav-item" data-page="roadmap.html"><span class="material-symbols-outlined">alt_route</span><span>Roadmaps</span></a>
+      <a href="learn.html" class="sb-nav-item" data-page="learn.html"><span class="material-symbols-outlined">school</span><span>Learning</span></a>
+      <a href="projects.html" class="sb-nav-item" data-page="projects.html"><span class="material-symbols-outlined">work</span><span>Projects</span></a>
+      <a href="resume.html" class="sb-nav-item" data-page="resume.html"><span class="material-symbols-outlined">description</span><span>Resume</span></a>
+      <a href="assistant.html" class="sb-nav-item" data-page="assistant.html"><span class="material-symbols-outlined">smart_toy</span><span>Career Assistant</span></a>
+      <a href="badges.html" class="sb-nav-item" data-page="badges.html"><span class="material-symbols-outlined">workspace_premium</span><span>Achievements</span></a>
+      <a href="hackathons.html" class="sb-nav-item" data-page="hackathons.html"><span class="material-symbols-outlined">bolt</span><span>Hackathons</span></a>
     </nav>
-    <div class="d2-sidebar-bottom">
-      <a class="d2-settings-link" href="index.html">⚙ Settings</a>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle colour theme">🌙</button>
-      <button class="d2-logout" onclick="logout()">↪ Log out</button>
-    </div>
-  </aside>
-
-  <main class="d2-main">
-    <div class="container">
-    <div id="noProfile" class="hidden">
-      <h1>No profile found</h1>
-      <p class="subtitle">
-        Please <a href="index.html">create your profile</a> first to chat with your assistant.
-      </p>
-    </div>
-
-    <div id="assistantContent" class="hidden">
-      <h1>Career assistant</h1>
-      <p class="subtitle">Ask about your roadmap, missing skills, or what to do next.</p>
-
-      <div id="chatWindow" class="chat-window"></div>
-
-      <div class="chat-input-row">
-        <input type="text" id="chatInput" placeholder="e.g. What should I learn next?" autocomplete="off" />
-        <button type="button" id="sendBtn">Send</button>
-      </div>
-
-      <div class="suggested-questions" id="suggestedQuestions"></div>
-    </div>
-    </div>
-  </main>
-</div>
-    <script type="module">
-    import { requireAuth } from "./js/auth.js";
-    requireAuth();
-  </script>
-  <script src="js/gamification.js"></script>
-  <script src="js/assistant.js"></script>
-  <script src="js/theme.js"></script>
-</body>
-
-</html>
+  </div>
+  <div class="sb-sidebar-bottom">
+    <a href="index.html" class="sb-nav-item" data-page="index.html"><span class="material-symbols-outlined">person</span><span>Profile</span></a>
+    <button id="themeToggle" class="sb-theme-button" type="button"><span class="material-symbols-outlined">dark_mode</span><span>Appearance</span></button>
+    <button class="sb-logout" type="button"><span class="material-symbols-outlined">logout</span><span>Log out</span></button>
+    <div class="sb-mini-profile"><div class="sb-mini-avatar"><img id="sidebarAvatar" alt="Profile"><span id="sidebarInitials">SB</span></div><div><strong id="sidebarName">SkillBridge Student</strong><small>Career journey</small></div></div>
+  </div>
+</aside><div class="sb-canvas"><header class="sb-topbar"><div class="sb-mobile-brand"><span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span><strong>SkillBridge</strong></div><div class="sb-search"><span class="material-symbols-outlined">search</span><input type="search" placeholder="Search skills, career pathways, companies..."><kbd>Ctrl K</kbd></div><div class="sb-top-actions"><div class="sb-streak"><span class="material-symbols-outlined">local_fire_department</span><strong><span id="topStreak">0</span>-day streak</strong></div><a href="assessment.html" class="sb-readiness"><span class="material-symbols-outlined">bolt</span>AI Readiness Check</a><button class="sb-icon-button" type="button" aria-label="Notifications"><span class="material-symbols-outlined">notifications</span><i></i></button><a href="index.html" class="sb-profile"><img id="headerAvatar" alt="Profile"><span id="headerInitials">SB</span></a></div></header><main class="page-main"><div class="page-head"><div><p class="page-kicker">SKILLBRIDGE AI</p><h1>Career Copilot</h1><p>Your roadmap, skills and goals — in one intelligent conversation.</p></div><button id="clearChat" class="page-btn secondary"><span class="material-symbols-outlined">restart_alt</span>Reset chat</button></div><div id="noProfile" class="hidden glass-card page-card"><h2>Create your profile first</h2><p>Set a target role and skills so the copilot can personalize its guidance.</p><a class="page-btn" href="index.html">Open Profile</a></div><div id="assistantContent" class="ai-layout hidden"><section class="glass-card ai-chat-card"><div class="ai-chat-head"><div><strong>Career Copilot</strong><div class="ai-status"><span class="ai-dot"></span><span id="aiModeLabel">Smart mode</span></div></div><span class="page-chip">PERSONALIZED</span></div><div id="chatWindow" class="ai-messages"></div><div id="suggestedQuestions" class="ai-suggestions"></div><div class="ai-composer"><input id="chatInput" type="text" placeholder="Ask: What should I learn next?" autocomplete="off" aria-label="Ask SkillBridge AI"><button id="sendBtn" class="page-btn"><span class="material-symbols-outlined">send</span>Ask AI</button></div></section><aside class="ai-side"><section class="glass-card page-card"><div class="ai-profile-mini"><div id="aiAvatar" class="ai-avatar">SB</div><div><strong id="aiStudentName">Student</strong><p id="aiTargetRole">Target role</p></div></div><div class="stat-strip"><div class="mini-stat"><strong id="aiProgress">0%</strong><span>Roadmap</span></div><div class="mini-stat"><strong id="aiMissing">0</strong><span>Skill gaps</span></div><div class="mini-stat"><strong id="aiXP">0</strong><span>XP</span></div></div></section><section class="glass-card page-card"><p class="page-kicker">TRY THESE</p><div class="chip-row" id="quickActions"></div></section></aside></div></main></div></div><script src="./js/theme.js"></script><script src="./js/shared-ui.js?v=navfix2"></script><script type="module">import {requireAuth} from "./js/auth.js";requireAuth();</script><script src="./js/gamification.js"></script><script src="./js/gemini-config.js"></script><script src="./js/assistant.js"></script></body></html>

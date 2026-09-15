@@ -1,1 +1,142 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>(function(){document.documentElement.setAttribute("data-theme",localStorage.getItem("skillbridge_theme")||"light")})();</script><title>SkillBridge — My roadmap</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/dashboard2.css"><link rel="stylesheet" href="css/roadmap2.css"></head><body class="d2-body"><div class="d2-shell"><aside class="d2-sidebar"><a class="d2-logo" href="dashboard.html"><span>✦</span> skillbridge</a><nav class="d2-nav"><a href="dashboard.html"><span>▦</span> Overview</a><a href="learn.html"><span>▶</span> Learn</a><a class="active" href="roadmap.html"><span>⌁</span> My roadmap</a><a href="projects.html"><span>◈</span> Projects</a><a href="assessment.html"><span>✓</span> Assessments</a>  <a href="resume.html" ><span>▤</span> Resume</a><a href="assistant.html"><span>◌</span> Career assistant</a><a href="badges.html"><span>🏅</span> Badges</a><a href="dashboard.html#hackathons"><span>⚡</span> Hackathons</a></nav><div class="d2-sidebar-bottom"><a class="d2-settings-link" href="index.html">⚙ Settings</a><button id="themeToggle" class="theme-toggle" type="button">🌙</button><button class="d2-logout" onclick="logout()">↪ Log out</button></div></aside><main class="d2-main roadmap-main"><div id="noProfile" class="roadmap-empty hidden"><h1>Your roadmap starts in Settings</h1><p>Choose a target role and add the skills you already know. We’ll turn it into a plan you can follow.</p><a href="index.html">Set up my plan →</a></div><div id="roadmapContent" class="hidden"><header class="roadmap-header"><div><p class="d2-kicker">YOUR CAREER PATH</p><h1 id="roleHeading">Your roadmap</h1><p id="roleSubtitle"></p></div><a class="roadmap-settings" href="index.html">Edit goals</a></header><section class="roadmap-hero"><div><span class="roadmap-label">PATH PROGRESS</span><strong id="progressPercent">0%</strong><p id="progressLabel">Your plan is ready when you are.</p><div class="roadmap-progress"><span id="progressFill"></span></div></div><div class="roadmap-metrics"><div><strong id="completeCount">0</strong><span>Completed</span></div><div><strong id="remainingCount">0</strong><span>To explore</span></div><div><strong id="daysEstimate">0 days</strong><span>Estimated path</span></div></div></section><section class="current-focus"><div class="focus-icon">✦</div><div><span>FOCUS NOW</span><h2 id="focusSkill">Choose your next skill</h2><p id="focusDescription">A small, focused action is the fastest way to build confidence.</p></div><div class="focus-actions"><a id="focusVideo" target="_blank" rel="noopener">Watch lesson ↗</a><a id="focusProject">View project →</a></div></section><section class="roadmap-section"><div class="roadmap-section-title"><div><p class="d2-kicker">YOUR MILESTONES</p><h2>Build your skills in order</h2></div><span id="roadmapStatus">0 steps</span></div><div id="skillList" class="roadmap-list"></div></section></div></main></div><script src="js/theme.js"></script><script type="module">import {requireAuth} from "./js/auth.js";requireAuth();</script><script src="js/gamification.js"></script><script src="js/roadmap.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>(function(){document.documentElement.setAttribute("data-theme",localStorage.getItem("skillbridge_theme")||"light")})();</script>
+<title>SkillBridge — Career Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/dashboard2.css">
+<link rel="stylesheet" href="./css/roadmap2.css">
+  <link rel="stylesheet" href="./css/theme-fix.css">
+</head>
+<body class="sb-dashboard roadmap-page">
+<div class="sb-app">
+<aside class="sb-sidebar">
+  <div class="sb-sidebar-top">
+    <a href="dashboard.html" class="sb-brand">
+      <span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span>
+      <span><strong>SkillBridge</strong><small>AI Career Engine</small></span>
+    </a>
+    <a href="assessment.html" class="sb-launch">
+      <span class="material-symbols-outlined">bolt</span>Launch AI Assessment
+    </a>
+    <nav class="sb-navigation" aria-label="Main navigation">
+      <a href="dashboard.html" class="sb-nav-item" data-page="dashboard.html"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
+      <a href="assessment.html" class="sb-nav-item" data-page="assessment.html"><span class="material-symbols-outlined">quiz</span><span>Assessment</span></a>
+      <a href="roadmap.html" class="sb-nav-item sb-active" data-page="roadmap.html"><span class="material-symbols-outlined">alt_route</span><span>Roadmaps</span></a>
+      <a href="learn.html" class="sb-nav-item" data-page="learn.html"><span class="material-symbols-outlined">school</span><span>Learning</span></a>
+      <a href="projects.html" class="sb-nav-item" data-page="projects.html"><span class="material-symbols-outlined">work</span><span>Projects</span></a>
+      <a href="resume.html" class="sb-nav-item" data-page="resume.html"><span class="material-symbols-outlined">description</span><span>Resume</span></a>
+      <a href="assistant.html" class="sb-nav-item" data-page="assistant.html"><span class="material-symbols-outlined">smart_toy</span><span>Career Assistant</span></a>
+      <a href="badges.html" class="sb-nav-item" data-page="badges.html"><span class="material-symbols-outlined">workspace_premium</span><span>Achievements</span></a>
+      <a href="hackathons.html" class="sb-nav-item" data-page="hackathons.html"><span class="material-symbols-outlined">bolt</span><span>Hackathons</span></a>
+    </nav>
+  </div>
+  <div class="sb-sidebar-bottom">
+    <a href="index.html" class="sb-nav-item" data-page="index.html"><span class="material-symbols-outlined">person</span><span>Profile</span></a>
+    <button id="themeToggle" class="sb-theme-button" type="button"><span class="material-symbols-outlined">dark_mode</span><span>Appearance</span></button>
+    <button class="sb-logout" type="button"><span class="material-symbols-outlined">logout</span><span>Log out</span></button>
+    <div class="sb-mini-profile">
+      <div class="sb-mini-avatar"><img id="sidebarAvatar" alt="Profile"><span id="sidebarInitials">SB</span></div>
+      <div><strong id="sidebarName">SkillBridge Student</strong><small>Career journey</small></div>
+    </div>
+  </div>
+</aside>
+<div class="sb-canvas">
+<main class="sb-main roadmap-main">
+    <div id="noProfile" class="roadmap-empty hidden">
+      <h1>Your roadmap starts in Settings</h1>
+      <p>Choose a target role and add the skills you already know. We’ll turn it into a plan you can follow.</p>
+      <a href="index.html">Set up my plan →</a>
+    </div>
+
+    <div id="roadmapContent" class="hidden">
+      <header class="roadmap-header">
+        <div>
+          <p class="d2-kicker">YOUR CAREER PATH</p>
+          <h1 id="roleHeading">Your roadmap</h1>
+          <p id="roleSubtitle"></p>
+        </div>
+        <a class="roadmap-settings" href="index.html">Edit goals</a>
+      </header>
+
+      <section class="roadmap-hero">
+        <div class="hero-ring-block">
+          <div class="progress-ring-wrap">
+            <svg class="progress-ring" viewBox="0 0 160 160" aria-hidden="true">
+              <circle class="ring-track" cx="80" cy="80" r="70"></circle>
+              <circle class="ring-fill" id="progressRingFill" cx="80" cy="80" r="70"></circle>
+            </svg>
+            <div class="ring-center">
+              <strong id="progressPercent">0%</strong>
+              <span>path complete</span>
+            </div>
+          </div>
+          <p id="progressLabel" class="hero-ring-caption">Your plan is ready when you are.</p>
+        </div>
+
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-icon hero-stat-complete">✓</span>
+            <div><strong id="completeCount">0</strong><p>Completed</p></div>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-icon hero-stat-remaining">◔</span>
+            <div><strong id="remainingCount">0</strong><p>To explore</p></div>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-icon hero-stat-time">⏱</span>
+            <div><strong id="daysEstimate">0 days</strong><p>Estimated path</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="current-focus">
+        <div class="focus-icon" id="focusIcon">✦</div>
+        <div>
+          <span>FOCUS NOW</span>
+          <h2 id="focusSkill">Choose your next skill</h2>
+          <p id="focusDescription">A small, focused action is the fastest way to build confidence.</p>
+        </div>
+        <div class="focus-actions">
+          <a id="focusVideo" target="_blank" rel="noopener">Watch lesson ↗</a>
+          <a id="focusProject">View project →</a>
+        </div>
+      </section>
+
+      <section class="roadmap-section visual-roadmap">
+        <div class="roadmap-section-title">
+          <div>
+            <p class="d2-kicker">YOUR CAREER JOURNEY</p>
+            <h2>Build your path to the goal</h2>
+            <p class="roadmap-intro">Your complete roadmap at a glance. Follow the connected milestones from start to career-ready.</p>
+          </div>
+          <span id="roadmapStatus">0 steps</span>
+        </div>
+
+        <div class="career-map">
+          <div class="career-road-line"></div>
+          <div id="skillList" class="skill-path visual-skill-path"></div>
+          <div class="career-goal-node">
+            <div class="career-goal-icon">🎯</div>
+            <strong>Career Ready</strong>
+            <span id="careerGoalText">Complete your roadmap</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+</div>
+<script src="./js/theme.js"></script>
+<script src="./js/shared-ui.js?v=navfix2"></script>
+<script type="module">import {requireAuth} from "./js/auth.js";requireAuth();</script>
+<script src="./js/gamification.js"></script>
+<script src="./js/roadmap.js"></script>
+</body>
+</html>

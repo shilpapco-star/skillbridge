@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hackathons | SkillBridge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard2.css">
+  <link rel="stylesheet" href="./css/app-pages.css">
+  <link rel="stylesheet" href="./css/theme-fix.css">
+  <link rel="stylesheet" href="./css/ux-upgrade.css">
+</head>
+<body class="sb-dashboard">
+<div class="sb-app">
+  <aside class="sb-sidebar">
+    <div class="sb-sidebar-top">
+      <a href="dashboard.html" class="sb-brand"><span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span><span><strong>SkillBridge</strong><small>AI Career Engine</small></span></a>
+      <a href="assessment.html" class="sb-launch"><span class="material-symbols-outlined">bolt</span>Launch AI Assessment</a>
+      <nav class="sb-navigation" aria-label="Main navigation">
+        <a href="dashboard.html" class="sb-nav-item" data-page="dashboard.html"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
+        <a href="assessment.html" class="sb-nav-item" data-page="assessment.html"><span class="material-symbols-outlined">quiz</span><span>Assessment</span></a>
+        <a href="roadmap.html" class="sb-nav-item" data-page="roadmap.html"><span class="material-symbols-outlined">alt_route</span><span>Roadmaps</span></a>
+        <a href="learn.html" class="sb-nav-item" data-page="learn.html"><span class="material-symbols-outlined">school</span><span>Learning</span></a>
+        <a href="projects.html" class="sb-nav-item" data-page="projects.html"><span class="material-symbols-outlined">work</span><span>Projects</span></a>
+        <a href="resume.html" class="sb-nav-item" data-page="resume.html"><span class="material-symbols-outlined">description</span><span>Resume</span></a>
+        <a href="assistant.html" class="sb-nav-item" data-page="assistant.html"><span class="material-symbols-outlined">smart_toy</span><span>Career Assistant</span></a>
+        <a href="badges.html" class="sb-nav-item" data-page="badges.html"><span class="material-symbols-outlined">workspace_premium</span><span>Achievements</span></a>
+        <a href="hackathons.html" class="sb-nav-item" data-page="hackathons.html"><span class="material-symbols-outlined">emoji_events</span><span>Hackathons</span></a>
+      </nav>
+    </div>
+    <div class="sb-sidebar-bottom">
+      <a href="index.html" class="sb-nav-item" data-page="index.html"><span class="material-symbols-outlined">person</span><span>Profile</span></a>
+      <button id="themeToggle" class="sb-theme-button" type="button"><span class="material-symbols-outlined">dark_mode</span><span>Appearance</span></button>
+      <button class="sb-logout" type="button"><span class="material-symbols-outlined">logout</span><span>Log out</span></button>
+      <div class="sb-mini-profile"><div class="sb-mini-avatar"><img id="sidebarAvatar" alt="Profile"><span id="sidebarInitials">SB</span></div><div><strong id="sidebarName">SkillBridge Student</strong><small>Career journey</small></div></div>
+    </div>
+  </aside>
+  <div class="sb-canvas">
+    <header class="sb-topbar">
+      <div class="sb-mobile-brand"><span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span><strong>SkillBridge</strong></div>
+      <div class="sb-search"><span class="material-symbols-outlined">search</span><input type="search" placeholder="Search hackathons, challenges, opportunities..."><kbd>Ctrl K</kbd></div>
+      <div class="sb-top-actions"><div class="sb-streak"><span class="material-symbols-outlined">local_fire_department</span><strong><span id="topStreak">0</span>-day streak</strong></div><a href="assessment.html" class="sb-readiness"><span class="material-symbols-outlined">bolt</span>AI Readiness Check</a><button class="sb-icon-button" type="button" aria-label="Notifications"><span class="material-symbols-outlined">notifications</span></button></div>
+    </header>
+    <main class="page-main">
+      <section class="page-head"><div><p class="page-kicker">BUILD • COMPETE • SHOWCASE</p><h1>Hackathons & challenges</h1><p>Find opportunities that turn your SkillBridge progress into real-world proof.</p></div><a class="page-btn" href="assistant.html?q=Which%20hackathon%20should%20I%20choose%20for%20my%20career%20goal%3F"><span class="material-symbols-outlined">auto_awesome</span>Ask Career AI</a></section>
+      <div class="hack-hero-grid">
+        <section class="glass-card page-card hack-feature"><span class="hack-feature-icon"><span class="material-symbols-outlined">rocket_launch</span></span><p class="page-kicker">YOUR COMPETITION LOOP</p><h2>Learn → build → compete → prove it.</h2><p>Pick one challenge, build a focused project, publish the result, and add the evidence to your resume and portfolio.</p><div class="hack-steps"><span>01 Learn</span><span>02 Build</span><span>03 Submit</span><span>04 Showcase</span></div></section>
+        <section class="glass-card page-card hack-tip"><p class="page-kicker">SMART TIP</p><h2>Choose by skill, not hype.</h2><p>Match the challenge to the skills you want employers to see. A smaller finished project is stronger than an unfinished giant idea.</p><a href="assistant.html?q=Help%20me%20choose%20a%20hackathon%20based%20on%20my%20skills" class="page-btn secondary">Get a recommendation <span class="material-symbols-outlined">arrow_forward</span></a></section>
+      </div>
+      <section class="hack-grid" id="hackGrid"></section>
+    </main>
+  </div>
+</div>
+<script src="./js/theme.js"></script><script src="./js/shared-ui.js?v=navfix2"></script><script src="./js/gamification.js"></script><script src="./js/hackathons.js"></script>
+</body></html>

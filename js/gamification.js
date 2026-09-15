@@ -116,6 +116,7 @@
     getLevel,
     getBadges,
     getStreak,
+    updateStreak,
     BADGE_DEFINITIONS,
   };
 })();

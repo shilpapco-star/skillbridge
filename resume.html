@@ -1,79 +1,190 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <script>
-    (function() {
-      const saved = localStorage.getItem("skillbridge_theme") || "light";
-      document.documentElement.setAttribute("data-theme", saved);
-    })();
-  </script>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SkillBridge — Resume Analysis</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/dashboard2.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script>document.documentElement.setAttribute('data-theme',localStorage.getItem('skillbridge_theme')||'dark');</script>
+  <title>SkillBridge — Smart Resume Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard2.css">
+  <link rel="stylesheet" href="./css/app-pages.css">
+  <link rel="stylesheet" href="./css/resume2.css">
+  <link rel="stylesheet" href="./css/theme-fix.css">
 </head>
-<body>
-
-  <div class="d2-shell">
-  <aside class="d2-sidebar">
-    <a class="d2-logo" href="dashboard.html"><span>✦</span> skillbridge</a>
-    <nav class="d2-nav">
-      <a href="dashboard.html"><span>▦</span> Overview</a>
-      <a href="learn.html"><span>▶</span> Learn</a>
-      <a href="roadmap.html"><span>⌁</span> My roadmap</a>
-      <a href="projects.html"><span>◈</span> Projects</a>
-      <a href="assessment.html"><span>✓</span> Assessments</a>
-      <a href="resume.html" class="active"><span>▤</span> Resume</a>
-      <a href="assistant.html"><span>◌</span> Career assistant</a>
-      <a href="badges.html"><span>🏅</span> Badges</a>
-      <a href="dashboard.html#hackathons"><span>⚡</span> Hackathons</a>
+<body class="sb-dashboard">
+<div class="sb-app">
+<aside class="sb-sidebar">
+  <div class="sb-sidebar-top">
+    <a href="dashboard.html" class="sb-brand"><span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span><span><strong>SkillBridge</strong><small>AI Career Engine</small></span></a>
+    <a href="assessment.html" class="sb-launch"><span class="material-symbols-outlined">bolt</span>Launch AI Assessment</a>
+    <nav class="sb-navigation" aria-label="Main navigation">
+      <a href="dashboard.html" class="sb-nav-item" data-page="dashboard.html"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
+      <a href="assessment.html" class="sb-nav-item" data-page="assessment.html"><span class="material-symbols-outlined">quiz</span><span>Assessment</span></a>
+      <a href="roadmap.html" class="sb-nav-item" data-page="roadmap.html"><span class="material-symbols-outlined">alt_route</span><span>Roadmaps</span></a>
+      <a href="learn.html" class="sb-nav-item" data-page="learn.html"><span class="material-symbols-outlined">school</span><span>Learning</span></a>
+      <a href="projects.html" class="sb-nav-item" data-page="projects.html"><span class="material-symbols-outlined">work</span><span>Projects</span></a>
+      <a href="resume.html" class="sb-nav-item sb-active" data-page="resume.html"><span class="material-symbols-outlined">description</span><span>Resume</span></a>
+      <a href="assistant.html" class="sb-nav-item" data-page="assistant.html"><span class="material-symbols-outlined">smart_toy</span><span>Career Assistant</span></a>
+      <a href="badges.html" class="sb-nav-item" data-page="badges.html"><span class="material-symbols-outlined">workspace_premium</span><span>Achievements</span></a>
+      <a href="hackathons.html" class="sb-nav-item" data-page="hackathons.html"><span class="material-symbols-outlined">bolt</span><span>Hackathons</span></a>
     </nav>
-    <div class="d2-sidebar-bottom">
-      <a class="d2-settings-link" href="index.html">⚙ Settings</a>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle colour theme">🌙</button>
-      <button class="d2-logout" onclick="logout()">↪ Log out</button>
-    </div>
-  </aside>
+  </div>
+  <div class="sb-sidebar-bottom">
+    <a href="index.html" class="sb-nav-item" data-page="index.html"><span class="material-symbols-outlined">person</span><span>Profile</span></a>
+    <button id="themeToggle" class="sb-theme-button" type="button"><span class="material-symbols-outlined">dark_mode</span><span>Appearance</span></button>
+    <button class="sb-logout" type="button"><span class="material-symbols-outlined">logout</span><span>Log out</span></button>
+    <div class="sb-mini-profile"><div class="sb-mini-avatar"><img id="sidebarAvatar" alt="Profile"><span id="sidebarInitials">SB</span></div><div><strong id="sidebarName">SkillBridge Student</strong><small>Career journey</small></div></div>
+  </div>
+</aside>
 
-  <main class="d2-main">
-    <div class="container">
-    <div id="noProfile" class="hidden">
-      <h1>No profile found</h1>
-      <p class="subtitle">
-        Please <a href="index.html">create your profile</a> first to analyze your resume.
-      </p>
-    </div>
-    <div id="resumeContent" class="hidden">
-      <h1>Resume skill analysis</h1>
-      <p class="subtitle">Paste your resume text below. We'll extract technical skills and compare them to your target role.</p>
+<div class="sb-canvas">
+<header class="sb-topbar">
+  <div class="sb-mobile-brand"><span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span><strong>SkillBridge</strong></div>
+  <div class="sb-search"><span class="material-symbols-outlined">search</span><input type="search" placeholder="Search skills, career pathways, companies..."><kbd>Ctrl K</kbd></div>
+  <div class="sb-top-actions">
+    <div class="sb-streak"><span class="material-symbols-outlined">local_fire_department</span><strong><span id="topStreak">0</span>-day streak</strong></div>
+    <a href="assessment.html" class="sb-readiness"><span class="material-symbols-outlined">bolt</span>AI Readiness Check</a>
+    <button class="sb-icon-button" type="button" aria-label="Notifications"><span class="material-symbols-outlined">notifications</span><i></i></button>
+    <a href="index.html" class="sb-profile"><img id="headerAvatar" alt="Profile"><span id="headerInitials">SB</span></a>
+  </div>
+</header>
 
-      <textarea id="resumeText" rows="10" placeholder="Paste your resume text here..."></textarea>
-      <button type="button" id="analyzeBtn">Analyze resume</button>
+<main class="page-main resume-main">
+  <div id="noProfile" class="resume-empty hidden">
+    <div class="empty-icon"><span class="material-symbols-outlined">person</span></div>
+    <h1>Create your profile first</h1>
+    <p>SkillBridge uses your target role and profile details to personalize your resume tools.</p>
+    <a class="page-btn" href="index.html">Open profile</a>
+  </div>
 
-      <div id="resultsSection" class="hidden">
-        <h3 class="section-heading">Skills found in your resume</h3>
-        <div id="foundSkills" class="skill-tags"></div>
-
-        <h3 class="section-heading">Missing for your target role</h3>
-        <div id="missingSkills" class="skill-tags"></div>
-
-        <button type="button" id="mergeBtn" class="secondary-btn">Add found skills to my profile</button>
-        <span id="mergeMessage" class="saved-message hidden">✅ Profile updated with new skills!</span>
+  <div id="resumeContent" class="hidden">
+    <div class="page-head resume-page-head">
+      <div>
+        <p class="page-kicker">SMART RESUME STUDIO</p>
+        <h1>Build a resume that gets noticed.</h1>
+        <p id="resumeSubtitle">Create, check and tailor your resume for real job applications.</p>
+      </div>
+      <div class="resume-head-actions">
+        <button id="saveResumeBtn" type="button" class="secondary-btn"><span class="material-symbols-outlined">save</span>Save</button>
+        <button id="printResumeBtn" type="button" class="page-btn"><span class="material-symbols-outlined">download</span>Download PDF</button>
       </div>
     </div>
+
+    <div class="resume-dashboard">
+      <section class="resume-editor glass-card">
+        <div class="studio-tabs">
+          <button class="studio-tab active" data-tab="builder">Builder</button>
+          <button class="studio-tab" data-tab="tailor">Job Match</button>
+          <button class="studio-tab" data-tab="tips">Resume Health</button>
+        </div>
+
+        <div id="builderTab" class="studio-panel active">
+          <div class="panel-title">
+            <div><span class="panel-icon"><span class="material-symbols-outlined">edit_document</span></span><div><h2>Resume Builder</h2><p>Fill the important sections. Your preview updates instantly.</p></div></div>
+            <button id="loadSampleBtn" class="text-btn" type="button">Use sample</button>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-head"><h3>Contact</h3><span>Essential</span></div>
+            <div class="form-grid two">
+              <label>Full name<input id="rName" placeholder="Your name"></label>
+              <label>Target role<input id="rRole" placeholder="e.g. Software Developer"></label>
+              <label>Email<input id="rEmail" type="email" placeholder="you@email.com"></label>
+              <label>Phone<input id="rPhone" placeholder="+91 XXXXX XXXXX"></label>
+              <label>Location<input id="rLocation" placeholder="Bengaluru, India"></label>
+              <label>LinkedIn<input id="rLinkedin" placeholder="linkedin.com/in/yourname"></label>
+              <label>GitHub<input id="rGithub" placeholder="github.com/yourname"></label>
+              <label>Portfolio<input id="rPortfolio" placeholder="yourportfolio.com"></label>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-head"><h3>Professional summary</h3><span id="summaryCount">0 / 300</span></div>
+            <textarea id="rSummary" maxlength="300" rows="4" placeholder="2–3 lines: who you are, your strongest skills and the value you can bring."></textarea>
+            <button id="improveSummaryBtn" class="ai-mini-btn" type="button"><span class="material-symbols-outlined">auto_awesome</span>Improve with Career AI</button>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-head"><h3>Technical skills</h3><span>Use commas</span></div>
+            <input id="rSkills" placeholder="JavaScript, Python, SQL, Git, React">
+            <div id="skillChips" class="edit-chips"></div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-head"><h3>Education</h3><span>Most recent first</span></div>
+            <div id="educationList"></div>
+            <button id="addEducation" class="add-row-btn" type="button"><span class="material-symbols-outlined">add</span>Add education</button>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-head"><h3>Projects</h3><span>Show impact</span></div>
+            <div id="projectList"></div>
+            <button id="addProject" class="add-row-btn" type="button"><span class="material-symbols-outlined">add</span>Add project</button>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-head"><h3>Experience / internship</h3><span>Optional</span></div>
+            <div id="experienceList"></div>
+            <button id="addExperience" class="add-row-btn" type="button"><span class="material-symbols-outlined">add</span>Add experience</button>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-head"><h3>Certifications & achievements</h3><span>Optional</span></div>
+            <textarea id="rAchievements" rows="4" placeholder="One achievement per line"></textarea>
+          </div>
+        </div>
+
+        <div id="tailorTab" class="studio-panel">
+          <div class="panel-title">
+            <div><span class="panel-icon"><span class="material-symbols-outlined">target</span></span><div><h2>Tailor for a job</h2><p>Paste a job description to see what your resume should emphasize.</p></div></div>
+          </div>
+          <textarea id="jobDescription" class="jd-box" rows="12" placeholder="Paste the job description here..."></textarea>
+          <div class="jd-actions"><span id="jdWords">0 words</span><button id="matchJobBtn" class="page-btn" type="button"><span class="material-symbols-outlined">analytics</span>Match my resume</button></div>
+          <div id="jobMatchResults" class="hidden job-match-results"></div>
+        </div>
+
+        <div id="tipsTab" class="studio-panel">
+          <div class="panel-title">
+            <div><span class="panel-icon"><span class="material-symbols-outlined">health_and_safety</span></span><div><h2>Resume Health</h2><p>Quick checks that matter in real applications.</p></div></div>
+          </div>
+          <div id="healthChecks" class="health-list"></div>
+          <div class="resume-tip-card"><span class="material-symbols-outlined">lightbulb</span><div><strong>Placement tip</strong><p>Keep your resume focused on the role. Use measurable outcomes where possible instead of only listing responsibilities.</p></div></div>
+        </div>
+      </section>
+
+      <aside class="resume-preview-column">
+        <div class="preview-toolbar">
+          <div><span class="live-dot"></span><strong>Live preview</strong></div>
+          <span id="previewStatus">Auto-saved locally</span>
+        </div>
+        <article id="resumePreview" class="resume-paper">
+          <header class="paper-header">
+            <h1 id="pName">Your Name</h1>
+            <p id="pRole">Target Role</p>
+            <div id="pContact" class="paper-contact"></div>
+          </header>
+          <section id="pSummarySection"><h2>SUMMARY</h2><p id="pSummary">Add a professional summary to see it here.</p></section>
+          <section id="pSkillsSection"><h2>SKILLS</h2><p id="pSkills">Add your technical skills.</p></section>
+          <section id="pExperienceSection"><h2>EXPERIENCE</h2><div id="pExperience"></div></section>
+          <section id="pProjectsSection"><h2>PROJECTS</h2><div id="pProjects"></div></section>
+          <section id="pEducationSection"><h2>EDUCATION</h2><div id="pEducation"></div></section>
+          <section id="pAchievementsSection"><h2>ACHIEVEMENTS</h2><div id="pAchievements"></div></section>
+        </article>
+      </aside>
     </div>
-  </main>
+  </div>
+</main>
+</div>
 </div>
 
-  <script src="js/theme.js"></script>
-  <script type="module">
-    import { requireAuth } from "./js/auth.js";
-    requireAuth();
-  </script>
-  <script src="js/gamification.js"></script>
-  <script src="js/resume.js"></script>
+<script src="./js/theme.js"></script>
+<script src="./js/shared-ui.js?v=navfix2"></script>
+<script type="module">import {requireAuth} from "./js/auth.js";requireAuth();</script>
+<script src="./js/gamification.js"></script>
+<script src="./js/resume.js"></script>
 </body>
 </html>

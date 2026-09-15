@@ -1,0 +1,48 @@
+body.page-ready .ai-chat-card{animation:pageIn .45s ease both}@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ai-disconnect{margin-top:8px;width:100%;justify-content:center}
+
+/* Assistant input fix */
+.ai-chat-card,
+.ai-chat-card * { box-sizing: border-box; }
+
+.ai-chat-card {
+  position: relative;
+  z-index: 5;
+}
+
+.ai-composer {
+  position: relative !important;
+  z-index: 20 !important;
+  pointer-events: auto !important;
+}
+
+.ai-composer input,
+#chatInput {
+  position: relative !important;
+  z-index: 21 !important;
+  pointer-events: auto !important;
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  cursor: text !important;
+  opacity: 1 !important;
+}
+
+.ai-composer button,
+#sendBtn {
+  position: relative !important;
+  z-index: 21 !important;
+  pointer-events: auto !important;
+}
+
+.ai-chat-card::before,
+.ai-chat-card::after {
+  pointer-events: none !important;
+}
+
+@media (min-width: 901px) {
+  .sb-canvas,
+  .page-main,
+  .ai-layout {
+    position: relative;
+  }
+}

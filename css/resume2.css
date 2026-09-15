@@ -1,0 +1,145 @@
+/* =========================
+   SkillBridge Smart Resume Studio
+   ========================= */
+.resume-main{max-width:1240px}
+.resume-page-head{margin-bottom:22px}
+.resume-page-head h1{letter-spacing:-1.2px}
+.resume-head-actions{display:flex;gap:9px;align-items:center}
+.resume-head-actions button{display:inline-flex;align-items:center;gap:7px}
+.resume-head-actions .secondary-btn{margin-top:0}
+
+.resume-dashboard{display:grid;grid-template-columns:minmax(480px,1fr) minmax(400px,510px);gap:20px;align-items:start}
+.resume-editor{overflow:hidden}
+.glass-card{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-radius:18px}
+
+.studio-tabs{display:flex;padding:7px;border-bottom:1px solid rgba(255,255,255,.07);gap:5px}
+.studio-tab{flex:1;border:0;background:transparent;color:var(--sb-muted);padding:10px;border-radius:10px;cursor:pointer;font:700 12px "Plus Jakarta Sans";transition:.2s}
+.studio-tab:hover{background:rgba(255,255,255,.045);color:#fff}
+.studio-tab.active{background:rgba(100,125,255,.18);color:#fff}
+
+.studio-panel{display:none;padding:22px}
+.studio-panel.active{display:block;animation:studioIn .3s ease}
+@keyframes studioIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.panel-title{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:20px}
+.panel-title>div{display:flex;gap:12px;align-items:flex-start}
+.panel-icon{width:37px;height:37px;border-radius:11px;display:grid;place-items:center;background:rgba(105,125,255,.15);color:#aebaff}
+.panel-title h2{margin:0;font-size:16px}
+.panel-title p{margin:4px 0 0;color:var(--sb-muted);font-size:11px;line-height:1.5}
+.text-btn{border:0;background:transparent;color:#9aaaff;font-weight:700;font-size:11px;cursor:pointer}
+
+.form-section{padding:18px 0;border-top:1px solid rgba(255,255,255,.07)}
+.form-section:first-of-type{border-top:0;padding-top:0}
+.form-section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.form-section-head h3{margin:0;font-size:12.5px}
+.form-section-head span{font-size:10px;color:var(--sb-muted)}
+.form-grid{display:grid;gap:10px}
+.form-grid.two{grid-template-columns:1fr 1fr}
+.form-section label{font-size:10px;color:var(--sb-muted);font-weight:700}
+.form-section input,.form-section textarea,.jd-box{
+  width:100%;margin-top:5px;padding:11px 12px;border-radius:10px;
+  border:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.12);color:inherit;
+  font:500 11px "Plus Jakarta Sans";outline:none;transition:.2s;
+}
+.form-section textarea,.jd-box{resize:vertical;line-height:1.6}
+.form-section input:focus,.form-section textarea:focus,.jd-box:focus{border-color:rgba(120,145,255,.65);box-shadow:0 0 0 3px rgba(100,125,255,.08)}
+
+.edit-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.edit-chip{padding:5px 8px;border-radius:999px;background:rgba(100,125,255,.12);border:1px solid rgba(100,125,255,.18);font-size:9px;color:#cbd3ff}
+
+.ai-mini-btn,.add-row-btn{
+  margin-top:9px;border:1px solid rgba(110,135,255,.2);background:rgba(95,120,255,.08);color:#b6c2ff;
+  border-radius:9px;padding:8px 10px;font:700 10px "Plus Jakarta Sans";cursor:pointer;display:inline-flex;align-items:center;gap:5px
+}
+.ai-mini-btn:hover,.add-row-btn:hover{background:rgba(95,120,255,.16)}
+
+.dynamic-row{position:relative;padding:12px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(255,255,255,.018);margin-bottom:9px}
+.dynamic-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dynamic-grid .wide{grid-column:1/-1}
+.dynamic-row input,.dynamic-row textarea{margin-top:0}
+.remove-row{position:absolute;right:8px;top:8px;border:0;background:transparent;color:#88839f;cursor:pointer;font-size:16px}
+.remove-row:hover{color:#ff8f9d}
+
+.jd-actions{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.jd-actions>span{font-size:10px;color:var(--sb-muted)}
+.jd-actions .page-btn{display:inline-flex;align-items:center;gap:6px}
+
+.job-match-results{margin-top:18px}
+.match-score{display:flex;align-items:center;gap:15px;padding:16px;border-radius:14px;background:rgba(100,125,255,.09);border:1px solid rgba(100,125,255,.16)}
+.match-score-ring{width:76px;height:76px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(#6f8cff var(--score),rgba(255,255,255,.08) 0);position:relative;flex:0 0 76px}
+.match-score-ring:before{content:"";position:absolute;inset:7px;border-radius:50%;background:#171a30}
+.match-score-ring strong{position:relative;font-size:18px}
+.match-score h3{margin:0 0 3px;font-size:14px}
+.match-score p{margin:0;color:var(--sb-muted);font-size:10px}
+.match-columns{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+.match-box{padding:12px;border-radius:11px;border:1px solid rgba(255,255,255,.07)}
+.match-box h4{font-size:10px;margin:0 0 8px}
+.match-box ul{padding-left:17px;margin:0;color:var(--sb-muted);font-size:10px;line-height:1.8}
+.match-good h4{color:#71e2ad}.match-gap h4{color:#ff9aa5}
+.keyword-row{margin-top:10px;padding:11px;border-radius:11px;background:rgba(255,255,255,.025);font-size:10px;line-height:1.7}
+.keyword-row strong{color:#b8c4ff}
+
+.health-list{display:grid;gap:9px}
+.health-item{display:flex;gap:10px;align-items:center;padding:11px;border-radius:11px;border:1px solid rgba(255,255,255,.07)}
+.health-icon{width:27px;height:27px;border-radius:8px;display:grid;place-items:center;font-size:15px}
+.health-pass{background:rgba(75,210,150,.13);color:#70e0ae}
+.health-warn{background:rgba(255,180,80,.13);color:#ffc46f}
+.health-fail{background:rgba(255,100,120,.12);color:#ff9ca9}
+.health-item strong{display:block;font-size:10.5px}
+.health-item p{margin:2px 0 0;color:var(--sb-muted);font-size:9px}
+.resume-tip-card{display:flex;gap:10px;margin-top:14px;padding:13px;border-radius:12px;background:rgba(100,125,255,.08);color:#b9c5ff}
+.resume-tip-card p{margin:4px 0 0;color:var(--sb-muted);font-size:10px;line-height:1.6}
+
+.resume-preview-column{position:sticky;top:20px}
+.preview-toolbar{display:flex;justify-content:space-between;align-items:center;padding:0 3px 9px;color:var(--sb-muted);font-size:10px}
+.preview-toolbar>div{display:flex;align-items:center;gap:6px;color:#e7e5f5}
+.live-dot{width:6px;height:6px;border-radius:50%;background:#64dda3;box-shadow:0 0 9px rgba(100,221,163,.8)}
+#previewStatus{font-size:9px}
+.resume-paper{background:#fff;color:#20202a;min-height:700px;padding:40px 42px;box-shadow:0 18px 50px rgba(0,0,0,.28);border-radius:3px;font-family:Arial,sans-serif}
+.paper-header{text-align:center;border-bottom:1.5px solid #252532;padding-bottom:13px;margin-bottom:18px}
+.paper-header h1{margin:0;font-size:25px;letter-spacing:.5px}
+.paper-header>p{margin:4px 0 8px;font-size:12px;font-weight:700;color:#555}
+.paper-contact{display:flex;justify-content:center;flex-wrap:wrap;gap:6px 12px;font-size:8.5px;color:#555}
+.paper-contact a{color:#555;text-decoration:none}
+.resume-paper section{margin:0 0 15px}
+.resume-paper section h2{font-size:10px;letter-spacing:1.3px;margin:0 0 7px;border-bottom:1px solid #ddd;padding-bottom:4px}
+.resume-paper section p{font-size:9px;line-height:1.55;margin:0}
+.paper-item{margin-bottom:9px}
+.paper-item:last-child{margin-bottom:0}
+.paper-item-head{display:flex;justify-content:space-between;gap:10px}
+.paper-item strong{font-size:10px}
+.paper-item small{font-size:8px;color:#666}
+.paper-item em{font-size:8.5px;color:#555}
+.paper-item ul{margin:4px 0 0;padding-left:15px;font-size:8.5px;line-height:1.55}
+.paper-skills{font-size:9px;line-height:1.7}
+.paper-empty{color:#999;font-style:italic}
+
+.resume-empty{max-width:480px;margin:100px auto;text-align:center}
+.resume-empty .empty-icon{width:60px;height:60px;margin:0 auto 15px;border-radius:17px;display:grid;place-items:center;background:rgba(100,125,255,.12);color:#a9b6ff}
+.resume-empty h1{font-size:25px}
+.resume-empty p{color:var(--sb-muted);line-height:1.6;margin-bottom:18px}
+
+.hidden{display:none!important}
+
+@media(max-width:1050px){
+  .resume-dashboard{grid-template-columns:1fr}
+  .resume-preview-column{position:static}
+}
+@media(max-width:650px){
+  .form-grid.two,.dynamic-grid,.match-columns{grid-template-columns:1fr}
+  .dynamic-grid .wide{grid-column:auto}
+  .resume-page-head{flex-direction:column;align-items:flex-start}
+  .resume-head-actions{width:100%}
+  .resume-head-actions button{flex:1;justify-content:center}
+  .studio-panel{padding:16px}
+  .resume-paper{padding:28px 22px;min-height:600px}
+}
+
+[data-theme="light"] .glass-card{background:#fff;border-color:#e8e6ef}
+[data-theme="light"] .studio-tabs{border-color:#e8e6ef}
+[data-theme="light"] .studio-tab{color:#77758e}
+[data-theme="light"] .studio-tab.active{background:#f0efff;color:#5145b8}
+[data-theme="light"] .form-section{border-color:#eeeaf5}
+[data-theme="light"] .form-section input,[data-theme="light"] .form-section textarea,[data-theme="light"] .jd-box{background:#faf9fd;border-color:#e3e1ec;color:#29263b}
+[data-theme="light"] .dynamic-row{border-color:#e8e6ef;background:#fbfaff}
+[data-theme="light"] .resume-paper{box-shadow:0 18px 50px rgba(45,40,75,.13)}

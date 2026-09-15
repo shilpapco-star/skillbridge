@@ -1,72 +1,548 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>(function(){document.documentElement.setAttribute("data-theme",localStorage.getItem("skillbridge_theme")||"light")})();</script>
-  <title>SkillBridge — Your learning space</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillBridge — Your Learning Space</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="css/dashboard2.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0;1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard2.css">
+  <link rel="stylesheet" href="./css/theme-fix.css">
+  <link rel="stylesheet" href="./css/ux-upgrade.css">
 </head>
-<body class="d2-body">
-  <div id="dashboardShell" class="d2-shell">
-    <aside class="d2-sidebar">
-      <a class="d2-logo" href="dashboard.html"><span>✦</span> skillbridge</a>
-      <nav class="d2-nav">
-        <a href="dashboard.html" class="active"><span>▦</span> Overview</a>
-         
-      <a href="learn.html"><span>▶</span> Learn</a>
-      <a href="roadmap.html"><span>⌁</span> My roadmap</a>
-      <a href="projects.html"><span>◈</span> Projects</a>
-      <a href="assessment.html"><span>✓</span> Assessments</a>
-      <a href="resume.html" ><span>▤</span> Resume</a>
-      <a href="assistant.html"><span>◌</span> Career assistant</a>
-      <a href="badges.html"><span>🏅</span> Badges</a>
-      <a href="dashboard.html#hackathons"><span>⚡</span> Hackathons</a>
-    </nav>
-      </nav>
-      <div class="d2-sidebar-bottom">
-        <a class="d2-settings-link" href="index.html">⚙ Settings</a>
-        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle colour theme">🌙</button>
-        <button class="d2-logout" onclick="logout()">↪ Log out</button>
+
+<body class="sb-dashboard sb-premium-dashboard">
+  <div class="sb-app">
+
+    <aside class="sb-sidebar">
+      <div class="sb-sidebar-top">
+
+        <a href="dashboard.html" class="sb-brand">
+          <span class="sb-brand-icon">
+            <span class="material-symbols-outlined">alt_route</span>
+          </span>
+          <span>
+            <strong>SkillBridge</strong>
+            <small>AI Career Engine</small>
+          </span>
+        </a>
+
+        <a href="assessment.html" class="sb-launch">
+          <span class="material-symbols-outlined">bolt</span>
+          Launch AI Assessment
+        </a>
+
+        <nav class="sb-navigation" aria-label="Main navigation">
+          <a href="dashboard.html" class="sb-nav-item sb-active" data-page="dashboard.html">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+          </a>
+
+          <a href="assessment.html" class="sb-nav-item" data-page="assessment.html">
+            <span class="material-symbols-outlined">quiz</span>
+            <span>Assessment</span>
+          </a>
+
+          <a href="roadmap.html" class="sb-nav-item" data-page="roadmap.html">
+            <span class="material-symbols-outlined">alt_route</span>
+            <span>Roadmaps</span>
+          </a>
+
+          <a href="learn.html" class="sb-nav-item" data-page="learn.html">
+            <span class="material-symbols-outlined">school</span>
+            <span>Learning</span>
+          </a>
+
+          <a href="projects.html" class="sb-nav-item" data-page="projects.html">
+            <span class="material-symbols-outlined">work</span>
+            <span>Projects</span>
+          </a>
+
+          <a href="resume.html" class="sb-nav-item" data-page="resume.html">
+            <span class="material-symbols-outlined">description</span>
+            <span>Resume</span>
+          </a>
+
+          <a href="assistant.html" class="sb-nav-item" data-page="assistant.html">
+            <span class="material-symbols-outlined">smart_toy</span>
+            <span>Career Assistant</span>
+          </a>
+
+          <a href="badges.html" class="sb-nav-item" data-page="badges.html">
+            <span class="material-symbols-outlined">workspace_premium</span>
+            <span>Achievements</span>
+          </a>
+
+          <a href="hackathons.html" class="sb-nav-item" data-page="hackathons.html">
+            <span class="material-symbols-outlined">bolt</span>
+            <span>Hackathons</span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="sb-sidebar-bottom">
+        <a href="index.html" class="sb-nav-item" data-page="index.html">
+          <span class="material-symbols-outlined">person</span>
+          <span>Profile</span>
+        </a>
+
+        <button id="themeToggle" class="sb-theme-button" type="button">
+          <span class="material-symbols-outlined">dark_mode</span>
+          <span>Appearance</span>
+        </button>
+
+        <button class="sb-logout" type="button">
+          <span class="material-symbols-outlined">logout</span>
+          <span>Log out</span>
+        </button>
+
+        <div class="sb-mini-profile">
+          <div class="sb-mini-avatar">
+            <img id="sidebarAvatar" alt="Profile">
+            <span id="sidebarInitials">SB</span>
+          </div>
+          <div>
+            <strong id="sidebarName">SkillBridge Student</strong>
+            <small>Career journey</small>
+          </div>
+        </div>
       </div>
     </aside>
-    <main class="d2-main">
-      <header class="d2-header">
-        <div><p class="d2-kicker">YOUR SPACE</p><h1>Good to see you, <span id="d2FirstName">there</span> <span aria-hidden="true">✦</span></h1></div>
-        <div class="d2-header-actions"><a href="index.html" class="d2-avatar-button" title="Open settings"><img id="headerAvatar" alt="Your profile photo" /><span id="headerInitials">SB</span></a></div>
-      </header>
-      <section class="d2-hero">
-        <div class="d2-hero-copy">
-          <span class="d2-pill">YOUR NEXT FOCUS</span>
-          <h2 id="focusTitle">Build momentum, one skill at a time.</h2>
-          <p id="focusText">Set up your learning profile to get a personal recommendation.</p>
-          <div class="d2-hero-actions"><a id="focusCta" href="index.html" class="d2-btn-primary">Set up my plan <span>→</span></a><a href="learn.html" class="d2-btn-ghost">Browse lessons</a></div>
+
+    <div class="sb-canvas">
+
+      <header class="sb-topbar">
+        <div class="sb-mobile-brand">
+          <span class="sb-brand-icon">
+            <span class="material-symbols-outlined">alt_route</span>
+          </span>
+          <strong>SkillBridge</strong>
         </div>
-        <div class="d2-orbit" aria-hidden="true"><div class="d2-orbit-core">⌁</div><span class="orb orb-one">HTML</span><span class="orb orb-two">CSS</span><span class="orb orb-three">JS</span></div>
-      </section>
-      <section class="d2-stats" aria-label="Learning summary">
-        <article><span class="d2-stat-icon violet">◒</span><div><strong id="coverageStat">0%</strong><p>Path complete</p></div></article>
-        <article><span class="d2-stat-icon peach">▣</span><div><strong id="skillStat">0</strong><p>Skills covered</p></div></article>
-        <article><span class="d2-stat-icon mint">⏱</span><div><strong id="timeStat">0h</strong><p>Learning time</p></div></article>
-        <article><span class="d2-stat-icon blue">⚡</span><div><strong id="streakStat">0</strong><p>Day streak</p></div></article>
-      </section>
-      <section class="d2-section">
-        <div class="d2-section-heading"><div><p class="d2-kicker">KEEP LEARNING</p><h2>Continue your path</h2></div><a href="roadmap.html">See full roadmap →</a></div>
-        <div id="continueGrid" class="d2-continue-grid"></div>
-      </section>
-      <section id="hackathons" class="d2-section d2-hack-section">
-        <div class="d2-section-heading"><div><p class="d2-kicker">OPPORTUNITIES</p><h2>Hackathons & challenges</h2></div><a href="https://devpost.com/hackathons" target="_blank" rel="noopener">View all opportunities ↗</a></div>
-        <p class="d2-section-note">A hand-picked launchpad for finding active events. Always confirm deadlines and eligibility on the host site.</p>
-        <div id="hackathonGrid" class="d2-hack-grid"></div>
-      </section>
-    </main>
+
+        <div class="sb-search">
+          <span class="material-symbols-outlined">search</span>
+          <input type="search" placeholder="Search skills, career pathways, companies...">
+          <kbd>Ctrl K</kbd>
+        </div>
+
+        <div class="sb-top-actions">
+          <div class="sb-streak">
+            <span class="material-symbols-outlined">local_fire_department</span>
+            <strong><span id="topStreak">2</span>-day streak</strong>
+          </div>
+
+          <a href="assessment.html" class="sb-readiness">
+            <span class="material-symbols-outlined">bolt</span>
+            AI Readiness Check
+          </a>
+
+          <button class="sb-icon-button" aria-label="Notifications">
+            <span class="material-symbols-outlined">notifications</span>
+            <i></i>
+          </button>
+
+          <a href="index.html" class="sb-profile">
+            <img id="headerAvatar" src="" alt="Profile">
+            <span id="headerInitials">SB</span>
+          </a>
+        </div>
+      </header>
+
+      <main class="sb-main">
+
+        <section class="sb-welcome sb-premium-hero">
+          <div class="sb-welcome-copy">
+            <div class="sb-chip">
+              <span class="material-symbols-outlined">school</span>
+              CAMPUS TO CAREER SYNC ACTIVE
+            </div>
+
+            <h1>Welcome back, <span id="d2FirstName">there</span>! 🚀</h1>
+
+            <p>
+              Keep building your career momentum.
+              Your personalized SkillBridge journey is ready.
+            </p>
+          </div>
+
+          <div class="sb-welcome-actions sb-hero-actions">
+            <div class="sb-next-interview">
+              <span>NEXT FOCUS</span>
+              <strong>Keep learning</strong>
+            </div>
+
+            <a href="index.html" class="sb-light-button">Update Targets</a>
+          </div>
+        </section>
+
+        <section class="sb-metrics">
+
+          <article class="sb-metric-card">
+            <div class="sb-metric-top">
+              <span>Path Completion</span>
+              <span class="sb-metric-icon purple">
+                <span class="material-symbols-outlined">psychology</span>
+              </span>
+            </div>
+
+            <div class="sb-metric-value">
+              <strong id="coverageStat">0%</strong>
+            </div>
+
+            <div class="sb-metric-bottom">
+              <span class="sb-positive">
+                <span class="material-symbols-outlined">trending_up</span>
+                Keep going
+              </span>
+              <span>Career path</span>
+            </div>
+          </article>
+
+          <article class="sb-metric-card">
+            <div class="sb-metric-top">
+              <span>Skills Covered</span>
+              <span class="sb-metric-icon blue">
+                <span class="material-symbols-outlined">verified</span>
+              </span>
+            </div>
+
+            <div class="sb-metric-value">
+              <strong id="skillStat">0/0</strong>
+            </div>
+
+            <div class="sb-progress">
+              <span id="skillProgress"></span>
+            </div>
+
+            <div class="sb-metric-bottom">
+              <span>Skills validated on your path</span>
+            </div>
+          </article>
+
+          <article class="sb-metric-card">
+            <div class="sb-metric-top">
+              <span>Learning Time</span>
+              <span class="sb-metric-icon green">
+                <span class="material-symbols-outlined">timer</span>
+              </span>
+            </div>
+
+            <div class="sb-metric-value">
+              <strong id="timeStat">0h</strong>
+            </div>
+
+            <div class="sb-metric-bottom">
+              <span class="sb-positive">
+                <span class="material-symbols-outlined">insights</span>
+                Based on your activity
+              </span>
+            </div>
+          </article>
+
+          <article class="sb-metric-card">
+            <div class="sb-metric-top">
+              <span>Current Streak</span>
+              <span class="sb-metric-icon cyan">
+                <span class="material-symbols-outlined">local_fire_department</span>
+              </span>
+            </div>
+
+            <div class="sb-metric-value">
+              <strong id="streakStat">0</strong>
+              <small>days</small>
+            </div>
+
+            <div class="sb-metric-bottom">
+              <span>Don't break the chain</span>
+            </div>
+          </article>
+
+        </section>
+
+        <section class="sb-section">
+          <div class="sb-section-heading">
+            <div>
+              <span class="sb-section-label">YOUR NEXT MOVE</span>
+              <h2>Focus on what matters</h2>
+            </div>
+            <a href="learn.html">View learning hub →</a>
+          </div>
+
+          <div class="sb-focus-card">
+            <div class="sb-focus-icon">
+              <span class="material-symbols-outlined">neurology</span>
+            </div>
+
+            <div class="sb-focus-content">
+              <span class="sb-small-label">RECOMMENDED NEXT SKILL</span>
+              <h3 id="focusTitle">Build momentum, one skill at a time.</h3>
+              <p id="focusText">
+                Set up your learning profile to get a personalized recommendation.
+              </p>
+
+              <div class="sb-focus-actions">
+                <a id="focusCta" href="learn.html" class="sb-primary-button">
+                  Start learning
+                  <span class="material-symbols-outlined">arrow_forward</span>
+                </a>
+
+                <a href="assessment.html" class="sb-outline-button">
+                  Check my skills
+                </a>
+              </div>
+            </div>
+
+            <div class="sb-focus-orb">
+              <div class="sb-orbit-ring ring-one"></div>
+              <div class="sb-orbit-ring ring-two"></div>
+              <div class="sb-orbit-core">✦</div>
+              <span class="sb-orbit-tag tag-html">HTML</span>
+              <span class="sb-orbit-tag tag-css">CSS</span>
+              <span class="sb-orbit-tag tag-js">JS</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sb-section">
+          <div class="sb-section-heading">
+            <div>
+              <span class="sb-section-label">CONTINUE LEARNING</span>
+              <h2>Build skills that matter</h2>
+            </div>
+            <a href="roadmap.html">See full roadmap →</a>
+          </div>
+
+          <div id="continueGrid" class="sb-learning-grid"></div>
+        </section>
+
+        <section class="sb-section">
+          <div class="sb-section-heading">
+            <div>
+              <span class="sb-section-label">CAREER ENGINE</span>
+              <h2>Turn learning into proof</h2>
+            </div>
+          </div>
+
+          <div class="sb-career-grid">
+
+            <a href="assessment.html" class="sb-career-card">
+              <span class="sb-career-icon purple-bg">
+                <span class="material-symbols-outlined">quiz</span>
+              </span>
+              <span class="sb-small-label">ASSESS</span>
+              <h3>Discover your skill level</h3>
+              <p>Validate your knowledge and uncover the skills you should improve next.</p>
+              <span class="sb-card-link">Take assessment →</span>
+            </a>
+
+            <a href="roadmap.html" class="sb-career-card">
+              <span class="sb-career-icon blue-bg">
+                <span class="material-symbols-outlined">alt_route</span>
+              </span>
+              <span class="sb-small-label">ROADMAP</span>
+              <h3>Follow your career roadmap</h3>
+              <p>Turn your target role into a structured learning journey.</p>
+              <span class="sb-card-link">View roadmap →</span>
+            </a>
+
+            <a href="projects.html" class="sb-career-card">
+              <span class="sb-career-icon green-bg">
+                <span class="material-symbols-outlined">code</span>
+              </span>
+              <span class="sb-small-label">PROJECTS</span>
+              <h3>Build proof of your skills</h3>
+              <p>Create practical projects that strengthen your portfolio.</p>
+              <span class="sb-card-link">Explore projects →</span>
+            </a>
+
+          </div>
+        </section>
+
+        <section class="sb-ai-card">
+          <div class="sb-ai-symbol">
+            <span class="material-symbols-outlined">auto_awesome</span>
+          </div>
+
+          <div class="sb-ai-copy">
+            <span class="sb-section-label">SKILLBRIDGE AI</span>
+            <h2>Your career questions, one conversation away.</h2>
+            <p>Get guidance on skills, projects, resumes, interviews and career preparation.</p>
+          </div>
+
+          <a href="assistant.html" class="sb-primary-button">
+            Open Career Assistant
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </a>
+        </section>
+
+        <section class="sb-section sb-dashboard-insights">
+          <div class="sb-section-heading">
+            <div>
+              <span class="sb-section-label">YOUR PROGRESS</span>
+              <h2>Career snapshot</h2>
+            </div>
+            <span class="sb-live-status"><i></i> Updated just now</span>
+          </div>
+
+          <div class="sb-insight-grid">
+            <article class="sb-insight-card sb-readiness-card">
+              <div class="sb-insight-card-head">
+                <div>
+                  <span class="sb-small-label">CAREER READINESS</span>
+                  <h3 id="readinessScore">68%</h3>
+                  <span class="sb-trend"><span class="material-symbols-outlined">trending_up</span> +8% this week</span>
+                </div>
+                <div class="sb-readiness-ring" id="readinessRing"><span id="readinessRingValue">68%</span></div>
+              </div>
+              <p id="readinessText">You're building a strong foundation. Complete one assessment and add a project to move closer to interview-ready.</p>
+              <div class="sb-mini-bars">
+                <div><span>Skills</span><b id="readinessSkills">72%</b><i><em id="readinessSkillsBar"></em></i></div>
+                <div><span>Projects</span><b id="readinessProjects">60%</b><i><em id="readinessProjectsBar"></em></i></div>
+                <div><span>Assessment</span><b id="readinessAssessment">55%</b><i><em id="readinessAssessmentBar"></em></i></div>
+              </div>
+            </article>
+
+            <article class="sb-insight-card sb-week-card">
+              <div class="sb-insight-card-head">
+                <div>
+                  <span class="sb-small-label">LEARNING PULSE</span>
+                  <h3>This week</h3>
+                </div>
+                <span class="sb-week-total" id="weekTotal">6.5h</span>
+              </div>
+              <div class="sb-pulse-summary"><span><b id="pulseLessons">4</b> lessons</span><span><b id="pulseHours">6.5h</b> focused</span><span class="pulse-positive">Your recent learning</span></div>
+              <div class="sb-week-chart" id="weekChart" aria-label="Learning activity this week"></div>
+              <div class="sb-week-labels"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span></div>
+            </article>
+
+            <article class="sb-insight-card sb-goal-card">
+              <div class="sb-insight-card-head">
+                <div>
+                  <span class="sb-small-label">TODAY'S GOAL</span>
+                  <h3 id="goalTitle">Complete one focused lesson</h3>
+                </div>
+                <span class="material-symbols-outlined goal-icon">flag</span>
+              </div>
+              <div class="goal-task">
+                <span class="goal-check"><span class="material-symbols-outlined">school</span></span>
+                <div><strong id="goalTask">Finish your next roadmap lesson</strong><small>Estimated time · 45 minutes</small></div>
+              </div>
+              <div class="sb-goal-progress"><span id="goalBar"></span></div>
+              <div class="sb-goal-foot"><span id="goalProgressText">0 / 1 completed</span><button id="completeGoal" type="button">Mark done</button></div>
+            </article>
+          </div>
+
+          <div class="sb-momentum-panel">
+            <div class="momentum-main">
+              <div class="momentum-icon"><span class="material-symbols-outlined">speed</span></div>
+              <div>
+                <span class="sb-small-label">CAREER MOMENTUM</span>
+                <h3>You're moving in the right direction</h3>
+                <p>Consistent learning + practical work is strengthening your career profile.</p>
+              </div>
+              <strong id="momentumScore">0%</strong>
+            </div>
+            <div class="momentum-stats">
+              <div><span class="material-symbols-outlined">school</span><b id="momentumSkills">0</b><small>skills practiced</small></div>
+              <div><span class="material-symbols-outlined">fact_check</span><b id="momentumAssessments">0</b><small>assessments</small></div>
+              <div><span class="material-symbols-outlined">code</span><b id="momentumProjects">0</b><small>project in progress</small></div>
+              <div><span class="material-symbols-outlined">local_fire_department</span><b id="momentumStreak">0</b><small>day streak</small></div>
+            </div>
+            <div class="momentum-footer"><span>Weekly momentum</span><div class="momentum-line"><i id="momentumLine"></i></div><span class="momentum-up"><span class="material-symbols-outlined">insights</span> Based on activity</span></div>
+          </div>
+        </section>
+
+        <section class="sb-section sb-milestones-section">
+          <div class="sb-section-heading">
+            <div>
+              <span class="sb-section-label">CAREER JOURNEY</span>
+              <h2>Your next milestones</h2>
+            </div>
+            <a href="roadmap.html">Open roadmap →</a>
+          </div>
+          <div class="sb-milestone-grid">
+            <a href="assessment.html" class="sb-milestone-card done">
+              <span class="milestone-number">01</span><span class="milestone-state"><span class="material-symbols-outlined">check_circle</span> Foundation</span>
+              <h3>Know your baseline</h3><p>Understand your current skill level and gaps.</p>
+            </a>
+            <a href="learn.html" class="sb-milestone-card active">
+              <span class="milestone-number">02</span><span class="milestone-state"><span class="material-symbols-outlined">play_circle</span> In progress</span>
+              <h3>Build core skills</h3><p>Complete focused lessons for your target role.</p>
+            </a>
+            <a href="projects.html" class="sb-milestone-card">
+              <span class="milestone-number">03</span><span class="milestone-state"><span class="material-symbols-outlined">lock_open</span> Next up</span>
+              <h3>Create project proof</h3><p>Turn what you learn into portfolio-ready work.</p>
+            </a>
+            <a href="resume.html" class="sb-milestone-card">
+              <span class="milestone-number">04</span><span class="milestone-state"><span class="material-symbols-outlined">description</span> Upcoming</span>
+              <h3>Become application-ready</h3><p>Polish your resume and prepare for interviews.</p>
+            </a>
+          </div>
+        </section>
+
+        <section class="sb-section sb-activity-section">
+          <div class="sb-section-heading">
+            <div>
+              <span class="sb-section-label">RECENT ACTIVITY</span>
+              <h2>Your career momentum</h2>
+            </div>
+            <button id="refreshActivity" class="sb-text-button" type="button"><span class="material-symbols-outlined">refresh</span> Refresh</button>
+          </div>
+          <div class="sb-activity-grid">
+            <div class="sb-activity-card">
+              <div class="sb-activity-list" id="activityList" aria-live="polite"></div>
+            </div>
+            <div class="sb-quick-card">
+              <span class="sb-small-label">QUICK ACTIONS</span>
+              <h3>What do you want to improve?</h3>
+              <div class="sb-quick-actions">
+                <a href="learn.html"><span class="material-symbols-outlined">school</span><span><b>Learn a skill</b><small>Continue your next lesson</small></span><em>→</em></a>
+                <a href="assessment.html"><span class="material-symbols-outlined">fact_check</span><span><b>Check readiness</b><small>Validate your current level</small></span><em>→</em></a>
+                <a href="projects.html"><span class="material-symbols-outlined">terminal</span><span><b>Build a project</b><small>Turn knowledge into proof</small></span><em>→</em></a>
+                <a href="resume.html"><span class="material-symbols-outlined">description</span><span><b>Improve resume</b><small>Keep your profile job-ready</small></span><em>→</em></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="sb-footer">
+          <strong>✦ SkillBridge</strong>
+          <span>Bridge your skills. Build your career.</span>
+          <span>© 2026</span>
+        </footer>
+
+      </main>
+    </div>
   </div>
-  <script src="js/theme.js"></script>
-  <script type="module">import { requireAuth } from "./js/auth.js"; requireAuth();</script>
-  <script src="js/gamification.js"></script>
-  <script src="js/dashboard.js"></script>
+
+  <script src="./js/theme.js"></script>
+  <script src="./js/shared-ui.js?v=navfix2"></script>
+
+  <script type="module">
+    import { requireAuth } from "./js/auth.js";
+    requireAuth();
+  </script>
+
+  <script src="./js/gamification.js"></script>
+  <script src="./js/dashboard.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const stat = document.getElementById("skillStat");
+      const progress = document.getElementById("skillProgress");
+      if (stat && progress) {
+        const match = stat.textContent.match(/(\d+)\s*\/\s*(\d+)/);
+        if (match) {
+          const current = Number(match[1]);
+          const total = Number(match[2]);
+          progress.style.width = total ? `${Math.min(100, current / total * 100)}%` : "0%";
+        }
+      }
+    });
+  </script>
 </body>
 </html>

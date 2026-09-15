@@ -1,70 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script>
-  (function() {
-    const saved = localStorage.getItem("skillbridge_theme") || "light";
-    document.documentElement.setAttribute("data-theme", saved);
-  })();
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkillBridge — Skill Assessment</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎯</text></svg>" />
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/dashboard2.css" />
+  <script>
+    (function () {
+      const saved = localStorage.getItem("skillbridge_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", saved);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:FILL@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/dashboard2.css">
+  <link rel="stylesheet" href="./css/assessment2.css">
+  <link rel="stylesheet" href="./css/theme-fix.css">
 </head>
-<body>
 
-  <div class="d2-shell">
-  <aside class="d2-sidebar">
-    <a class="d2-logo" href="dashboard.html"><span>✦</span> skillbridge</a>
-    <nav class="d2-nav">
-      <a href="dashboard.html"><span>▦</span> Overview</a>
-      <a href="learn.html"><span>▶</span> Learn</a>
-      <a href="roadmap.html"><span>⌁</span> My roadmap</a>
-      <a href="projects.html"><span>◈</span> Projects</a>
-      <a href="assessment.html" class="active"><span>✓</span> Assessments</a>
-      <a href="resume.html"><span>▤</span> Resume</a>
-      <a href="assistant.html"><span>◌</span> Career assistant</a>
-      <a href="badges.html"><span>🏅</span> Badges</a>
-      <a href="dashboard.html#hackathons"><span>⚡</span> Hackathons</a>
-    </nav>
-    <div class="d2-sidebar-bottom">
-      <a class="d2-settings-link" href="index.html">⚙ Settings</a>
-      <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle colour theme">🌙</button>
-      <button class="d2-logout" onclick="logout()">↪ Log out</button>
-    </div>
-  </aside>
+<body class="sb-dashboard sb-assessment-page">
+  <div class="sb-app">
+    <aside class="sb-sidebar">
+      <div class="sb-sidebar-top">
+        <a href="dashboard.html" class="sb-brand">
+          <span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span>
+          <span><strong>SkillBridge</strong><small>AI Career Engine</small></span>
+        </a>
 
-  <main class="d2-main">
-    <div class="container">
-    <div id="noProfile" class="hidden">
-      <h1>No profile found</h1>
-      <p class="subtitle">
-        Please <a href="index.html">create your profile</a> first to take skill assessments.
-      </p>
-    </div>
+        <a href="assessment.html" class="sb-launch">
+          <span class="material-symbols-outlined">bolt</span>
+          Launch AI Assessment
+        </a>
 
-    <div id="assessmentContent" class="hidden">
-      <h1>Skill assessment</h1>
-      <p class="subtitle" id="assessSubtitle"></p>
+        <nav class="sb-navigation" aria-label="Main navigation">
+          <a href="dashboard.html" class="sb-nav-item" data-page="dashboard.html"><span class="material-symbols-outlined">dashboard</span><span>Dashboard</span></a>
+          <a href="assessment.html" class="sb-nav-item sb-active" data-page="assessment.html"><span class="material-symbols-outlined">quiz</span><span>Assessment</span></a>
+          <a href="roadmap.html" class="sb-nav-item" data-page="roadmap.html"><span class="material-symbols-outlined">alt_route</span><span>Roadmaps</span></a>
+          <a href="learn.html" class="sb-nav-item" data-page="learn.html"><span class="material-symbols-outlined">school</span><span>Learning</span></a>
+          <a href="projects.html" class="sb-nav-item" data-page="projects.html"><span class="material-symbols-outlined">work</span><span>Projects</span></a>
+          <a href="resume.html" class="sb-nav-item" data-page="resume.html"><span class="material-symbols-outlined">description</span><span>Resume</span></a>
+          <a href="assistant.html" class="sb-nav-item" data-page="assistant.html"><span class="material-symbols-outlined">smart_toy</span><span>Career Assistant</span></a>
+          <a href="badges.html" class="sb-nav-item" data-page="badges.html"><span class="material-symbols-outlined">workspace_premium</span><span>Achievements</span></a>
+          <a href="hackathons.html" class="sb-nav-item" data-page="hackathons.html"><span class="material-symbols-outlined">bolt</span><span>Hackathons</span></a>
+        </nav>
+      </div>
 
-      <div id="skillCards" class="skill-cards"></div>
+      <div class="sb-sidebar-bottom">
+        <a href="index.html" class="sb-nav-item" data-page="index.html"><span class="material-symbols-outlined">person</span><span>Profile</span></a>
+        <button id="themeToggle" class="sb-theme-button" type="button"><span class="material-symbols-outlined">dark_mode</span><span>Appearance</span></button>
+        <button class="sb-logout" type="button"><span class="material-symbols-outlined">logout</span><span>Log out</span></button>
+        <div class="sb-mini-profile">
+          <div class="sb-mini-avatar"><img id="assessmentAvatar" alt="Profile"><span id="assessmentInitials">SB</span></div>
+          <div><strong id="assessmentName">SkillBridge Student</strong><small>Career journey</small></div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="sb-canvas">
+      <header class="sb-topbar">
+        <div class="sb-mobile-brand">
+          <span class="sb-brand-icon"><span class="material-symbols-outlined">alt_route</span></span>
+          <strong>SkillBridge</strong>
+        </div>
+        <div class="sb-search">
+          <span class="material-symbols-outlined">search</span>
+          <input type="search" placeholder="Search skills, assessments, topics...">
+          <kbd>Ctrl K</kbd>
+        </div>
+        <div class="sb-top-actions">
+          <div class="sb-streak"><span class="material-symbols-outlined">local_fire_department</span><strong><span id="topStreak">0</span>-day streak</strong></div>
+          <a href="assessment.html" class="sb-readiness"><span class="material-symbols-outlined">bolt</span>AI Readiness Check</a>
+          <button class="sb-icon-button" type="button" aria-label="Notifications"><span class="material-symbols-outlined">notifications</span></button>
+        </div>
+      </header>
+
+      <main class="assess-main">
+        <div id="noProfile" class="assess-empty hidden">
+          <div class="assess-empty-icon"><span class="material-symbols-outlined">person_search</span></div>
+          <p class="assess-eyebrow">GET STARTED</p>
+          <h1>Create your career profile</h1>
+          <p>Please create your SkillBridge profile first. Your target role is used to build the right assessment for you.</p>
+          <a class="assess-primary-button" href="index.html">Create my profile <span>→</span></a>
+        </div>
+
+        <div id="assessmentContent" class="hidden">
+          <section class="assess-page-head">
+            <div>
+              <p class="assess-eyebrow">AI SKILL DIAGNOSTICS</p>
+              <h1>Prove what you know.</h1>
+              <p id="assessSubtitle">Check your skills and turn your knowledge into verified evidence.</p>
+            </div>
+            <a href="dashboard.html" class="assess-back"><span class="material-symbols-outlined">arrow_back</span>Dashboard</a>
+          </section>
+
+          <section class="assess-hero">
+            <div class="assess-hero-copy">
+              <div class="assess-hero-label"><span class="material-symbols-outlined">auto_awesome</span> YOUR READINESS</div>
+              <h2>Build confidence with<br><span>verified skills.</span></h2>
+              <p>Take short skill quizzes. A score of <strong>70% or higher</strong> verifies the skill and strengthens your career profile.</p>
+              <div class="assess-hero-points">
+                <span><span class="material-symbols-outlined">bolt</span>Quick quizzes</span>
+                <span><span class="material-symbols-outlined">verified</span>Verified evidence</span>
+                <span><span class="material-symbols-outlined">route</span>Better roadmaps</span>
+              </div>
+            </div>
+            <div class="progress-ring-wrap">
+              <svg class="progress-ring" viewBox="0 0 180 180" aria-hidden="true">
+                <circle class="ring-track" cx="90" cy="90" r="76"></circle>
+                <circle class="ring-fill" id="assessRingFill" cx="90" cy="90" r="76"></circle>
+              </svg>
+              <div class="ring-center"><strong id="assessRingPercent">0%</strong><span>verified</span></div>
+            </div>
+            <div class="assess-stats">
+              <div class="assess-stat"><span class="assess-stat-icon assess-stat-verified"><span class="material-symbols-outlined">verified</span></span><div><strong id="verifiedCount">0</strong><p>Verified</p></div></div>
+              <div class="assess-stat"><span class="assess-stat-icon assess-stat-improve"><span class="material-symbols-outlined">refresh</span></span><div><strong id="improveCount">0</strong><p>Needs improvement</p></div></div>
+              <div class="assess-stat"><span class="assess-stat-icon assess-stat-untested"><span class="material-symbols-outlined">radio_button_unchecked</span></span><div><strong id="untestedCount">0</strong><p>Not tested yet</p></div></div>
+            </div>
+          </section>
+
+          <section class="assess-section-head">
+            <div><p class="assess-eyebrow">YOUR SKILL INVENTORY</p><h2>Assessment roadmap</h2></div>
+            <div class="assess-filter-bar" id="assessFilterBar">
+              <button type="button" class="assess-filter active" data-filter="all">All skills</button>
+              <button type="button" class="assess-filter" data-filter="verified">Verified</button>
+              <button type="button" class="assess-filter" data-filter="improve">Needs improvement</button>
+              <button type="button" class="assess-filter" data-filter="untested">Not tested</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="assess-next-card" id="assessNextCard">
+            <div class="assess-next-icon"><span class="material-symbols-outlined">target</span></div>
+            <div class="assess-next-copy"><span class="assess-eyebrow">RECOMMENDED NEXT TEST</span><h3 id="nextSkillTitle">Choose a skill to begin</h3><p id="nextSkillText">Your assessment results will appear here.</p></div>
+            <a id="nextSkillAction" class="assess-primary-button" href="quiz.html">Start test <span>→</span></a>
+          </section>
+
+          <div id="skillCards" class="skill-cards"></div>
+          <p id="assessEmptyState" class="assess-filter-empty hidden">No skills in this category yet.</p>
+
+          <section class="assess-tip">
+            <div class="assess-tip-icon"><span class="material-symbols-outlined">lightbulb</span></div>
+            <div><strong>How SkillBridge works</strong><p>Self-reported skills are a starting point. Complete a quiz to turn them into verified skills that can guide your roadmap and learning priorities.</p></div>
+          </section>
+        </div>
+      </main>
     </div>
-    </div>
-  </main>
-</div>
+  </div>
 
   <script type="module">
-  import { requireAuth } from "./js/auth.js";
-  requireAuth();
-</script>
-<script src="js/gamification.js"></script>
-<script src="js/theme.js"></script>
-<script src="js/assessment.js"></script>
+    import { requireAuth } from "./js/auth.js";
+    requireAuth();
+  </script>
+  <script src="./js/gamification.js"></script>
+  <script src="./js/theme.js"></script>
+  <script src="./js/shared-ui.js?v=navfix2"></script>
+  <script src="./js/assessment.js"></script>
 </body>
 </html>
